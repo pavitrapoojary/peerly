@@ -1,0 +1,62 @@
+@startuml AccountabilityLoop
+!theme plain
+skinparam backgroundColor #FAFAF8
+skinparam roundcorner 12
+skinparam state {
+  BackgroundColor #FFFFFF
+  BorderColor #5B4FE0
+  StartColor #2DBFA0
+  EndColor #5B4FE0
+}
+skinparam defaultFontName "Plus Jakarta Sans"
+
+title Peerly — Closed-Loop Campus Accountability Lifecycle
+
+[*] --> ItemAvailable : Owner lists item in <60s
+
+state ItemAvailable {
+  ItemAvailable : Status = "Available"
+  ItemAvailable : Visible on Feed & Search
+}
+
+ItemAvailable --> RequestAccepted : Seeker taps "Request to Borrow"
+
+state RequestAccepted {
+  RequestAccepted : Status = "Borrowed"
+  RequestAccepted : Return-by Date calculated (+3 days)
+  RequestAccepted : Scripted Chat opened for handoff
+}
+
+RequestAccepted --> ActiveBorrow : Item picked up at hostel room
+
+state ActiveBorrow {
+  ActiveBorrow : Active countdown card in "My Peerly"
+  ActiveBorrow : Reminder: "Return by tomorrow, 6:00 PM"
+}
+
+ActiveBorrow --> ConditionCheck : Seeker taps "Mark as Returned"
+
+state ConditionCheck {
+  ConditionCheck : Step 1: "Returned in good condition?"
+  ConditionCheck : Choices: [Yes, Perfect] / [Minor Damage]
+}
+
+ConditionCheck --> PeerRating : Condition recorded
+
+state PeerRating {
+  PeerRating : Step 2: "Rate your peer interaction"
+  PeerRating : Choices: [👍 Smooth] / [👎 Needs Improvement]
+}
+
+PeerRating --> TrustScoreUpdated : Rating submitted
+
+state TrustScoreUpdated {
+  TrustScoreUpdated : Owner rating incremented
+  TrustScoreUpdated : Borrower trust score boosted
+  TrustScoreUpdated : Item status reset to "Available"
+}
+
+TrustScoreUpdated --> ItemAvailable : Item ready for next borrower
+TrustScoreUpdated --> [*]
+
+@enduml

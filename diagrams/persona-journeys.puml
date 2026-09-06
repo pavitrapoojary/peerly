@@ -1,0 +1,62 @@
+@startuml PersonaJourneys
+!theme plain
+skinparam backgroundColor #FAFAF8
+skinparam roundcorner 12
+skinparam sequenceArrowThickness 2
+skinparam defaultFontName "Plus Jakarta Sans"
+
+title Peerly — Persona Interaction & Exchange Flows
+
+actor "Haripriya M.\n(Seeker / Demand)" as Seeker
+actor "Jean R.\n(Idle Owner / Supply)" as Owner
+actor "Thirupathi M.\n(Bulk-Reseller / Commerce)" as Reseller
+participant "Peerly Marketplace\n(Feed & Search)" as Feed
+participant "Item Detail &\nChat Drawer" as Detail
+participant "Accountability &\nTrust Engine" as Trust
+
+== Journey 1: Haripriya (Seeker) borrows a Blazer for Case Finals ==
+Seeker -> Feed : Searches "Blazer" or taps "Borrow" chip
+Feed --> Seeker : Displays Navy Blazer (Size 40/M) in Hostel 3
+Seeker -> Detail : Opens listing (#/item/l1)
+Detail --> Seeker : Shows condition ("Like New"), location, owner trust score
+Seeker -> Detail : Taps "Request to Borrow"
+Detail -> Detail : Simulated accept spinner (500ms)
+Detail --> Seeker : "Request Accepted!" with Return-by Date: "Thursday, 6:00 PM"
+Seeker -> Detail : Taps "Open Chat"
+Detail --> Seeker : Opens scripted chat drawer with Owner (Hostel 3 pickup)
+Seeker -> Owner : Coordinates pickup at Hostel 3 lobby
+
+== Journey 2: Jean R. (Passive Idle Owner) lists TI-84 in <60 Seconds ==
+Owner -> Feed : Taps "+ Post an Item"
+Feed -> Detail : Opens rapid Create Listing (#/new-listing)
+Owner -> Detail : Selects preset photo "Calculator", Title: "TI-84 Plus CE"
+Owner -> Detail : Toggles Mode: "Share (Lend)", Sets Return Terms: "3 Days / Exam Week"
+Owner -> Detail : Taps "Post Item"
+Detail -> Feed : Instantly adds item to top of live Campus Feed
+Feed --> Owner : Success Toast & Live Listing Visibility
+note over Owner, Feed
+  Jean's calculator is now discoverable campus-wide
+  without sending a single spam message on WhatsApp.
+end note
+
+== Journey 3: Thirupathi (Bulk Reseller) Sells Insulated Water Bottles ==
+Reseller -> Detail : Opens Create Listing flow (#/new-listing)
+Reseller -> Detail : Toggles Mode: "Sell", Price: ₹299 (MRP: ₹799)
+Reseller -> Detail : Switches ON "Listing multiple units / bulk inventory?"
+Detail -> Trust : Checks ID Verification status
+Trust --> Detail : Confirms "Verified Seller" badge unlocked
+Reseller -> Feed : Publishes listing
+Feed --> Seeker : Shows item with "Verified Seller Batch" badge
+Seeker -> Detail : Taps "Buy for ₹299" -> Scripted handoff with UPI payment on delivery
+
+== Journey 4: Closed-Loop Return & Peer Accountability ==
+Seeker -> Trust : Opens "My Peerly" (#/profile) -> Views Active Borrow Card
+Seeker -> Trust : Taps "Mark as Returned"
+Trust --> Seeker : Prompts Condition Check: "Returned in good condition?" (Yes/No)
+Seeker -> Trust : Selects "Yes, Perfect Condition"
+Trust --> Seeker : Prompts Peer Rating: "Rate experience with Owner: 👍 / 👎"
+Seeker -> Trust : Selects "👍 Smooth & Friendly!"
+Trust -> Trust : Bumps Owner's Trust Score (👍 19, 100%)
+Trust -> Trust : Clears active borrow and updates campus trust index
+
+@enduml

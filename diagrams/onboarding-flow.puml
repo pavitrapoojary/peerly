@@ -1,0 +1,50 @@
+@startuml OnboardingFlow
+!theme plain
+skinparam backgroundColor #FAFAF8
+skinparam roundcorner 12
+skinparam sequenceArrowThickness 2
+skinparam ParticipantPadding 15
+skinparam BoxPadding 10
+skinparam defaultFontName "Plus Jakarta Sans"
+
+title Peerly — Campus Onboarding & Verification Flow
+
+actor "MBA Student" as Student
+participant "UI Router\n(#/onboarding)" as UI
+participant "Verification Engine\n(Simulated)" as Verify
+participant "State Store\n(appState)" as State
+
+== Step 1: Campus Selection ==
+Student -> UI : Opens App / Taps "Get Started"
+UI -> Student : Displays searchable list of residential B-schools\n(GLIM Chennai pre-highlighted, IIMB, ISB, XLRI)
+Student -> UI : Selects "GLIM Chennai"
+UI -> State : Updates selected campus & domain context
+
+== Step 2: Campus .edu Email Verification ==
+UI -> Student : Prompts for institutional email (@greatlakes.edu.in)
+Student -> UI : Enters email & taps "Send OTP"
+UI -> Verify : Sends 4-digit simulated OTP (Code: 4829)
+Verify --> UI : OTP Dispatched
+Student -> UI : Enters 4-digit OTP (Auto-advancing boxes)
+UI -> Verify : Submits OTP credentials
+Verify -> Verify : Simulates validation spinner (600ms)
+Verify --> UI : Email Verified Successfully
+UI -> State : Sets user.verified = true
+
+== Step 3: Student ID Upload (Optional) ==
+UI -> Student : Prompts optional Campus ID card upload\n(Unlocks "Verified Seller" badge & bulk resale)
+alt Student Uploads ID Card
+    Student -> UI : Uploads/clicks ID photo (glim_id.png)
+    UI -> State : Sets user.isVerifiedSeller = true
+else Student Skips
+    Student -> UI : Taps "Skip for now"
+    UI -> State : Maintains standard Verified Student status
+end
+
+== Step 4: You're In! (Access Granted) ==
+UI -> Student : Displays celebration modal with "Verified at GLIM Chennai" badge
+Student -> UI : Taps "Explore Campus Feed"
+UI -> State : Calls completeOnboarding()
+UI --> Student : Redirects to Home Feed (#/feed) with full listing & borrowing privileges
+
+@enduml
