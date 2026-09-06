@@ -20,12 +20,8 @@
    - [Flow 1: Campus Onboarding & Verification](#flow-1-campus-onboarding--verification)
    - [Flow 2: Persona User Journeys (Seeker, Owner, Reseller)](#flow-2-persona-user-journeys-seeker-owner-reseller)
    - [Flow 3: Closed-Loop Accountability Lifecycle](#flow-3-closed-loop-accountability-lifecycle)
-6. [🗺️ Information Architecture & Hash Routing](#️-information-architecture--hash-routing)
-7. [🎨 Visual Design System & Palette](#-visual-design-system--palette)
-8. [📊 Mock Data & In-Memory State Model](#-mock-data--in-memory-state-model)
 9. [🔮 Product Roadmap & Future Architecture](#-product-roadmap--future-architecture)
 10. [🚀 Quick Start & How to Run](#-quick-start--how-to-run)
-11. [💼 Presentation & Grading Angle](#-presentation--grading-angle)
 
 ---
 
@@ -309,24 +305,6 @@ stateDiagram-v2
     TrustUpdated --> [*]
 ```
 
-#### 📄 PlantUML Source Code (`diagrams/accountability-loop.puml`):
-```plantuml
-@startuml AccountabilityLoop
-!theme plain
-skinparam backgroundColor #FAFAF8
-skinparam roundcorner 12
-
-[*] --> Available : Owner lists item in <60s
-Available --> Borrowed : Seeker requests item
-Borrowed --> ActiveCountdown : Return-by date set (+3 days)
-ActiveCountdown --> ConditionCheck : Taps "Mark as Returned"
-ConditionCheck --> PeerRating : Step 1: Good vs Damage
-PeerRating --> TrustUpdated : Step 2: Thumbs Up / Down
-TrustUpdated --> Available : Reset to Available
-TrustUpdated --> [*]
-@enduml
-```
-
 ---
 
 ## 🗺️ Information Architecture & Hash Routing
@@ -363,61 +341,6 @@ Peerly is architected as a **lightweight Single Page Application (SPA)** with ze
 └──────────────────┘
 ```
 
-### Route Table
-| Route Hash | View Component | Key Functionality |
-|---|---|---|
-| `#/` | [`LandingView`](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/landing.js) | Hero pitch, 3 Problem cards, 4 Solution pillars, 4-step How It Works, Personas. |
-| `#/onboarding` | [`OnboardingView`](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/onboarding.js) | 4-step wizard: Campus select → .edu OTP verify → Optional ID upload → Success. |
-| `#/feed` | [`FeedView`](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/feed.js) | Instant client-side search, mode filter chips (Borrow/Buy/Give), category pills, FAB. |
-| `#/item/:id` | [`ItemDetailView`](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/itemDetail.js) | Item details, request flow (500ms spinner), return-by date card, scripted chat drawer. |
-| `#/new-listing` | [`NewListingView`](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/newListing.js) | Under-60s rapid listing, preset photos, dynamic fields, bulk seller verification nudge. |
-| `#/profile` | [`ProfileView`](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/profile.js) | Trust score, active borrow reminder card, mark-as-returned, condition check, ratings. |
-
----
-
-## 🎨 Visual Design System & Palette
-
-The design aesthetic is **warm, trustworthy, and campus-fresh** — pairing clean typography with deliberate semantic color tokens:
-
-### Color System
-| Token | Hex Value | Semantic Usage |
-|---|---|---|
-| `--color-bg` | `#FAFAF8` | App background (warm off-white) |
-| `--color-surface` | `#FFFFFF` | Cards, modals, drawers |
-| `--color-surface-alt` | `#F3F1FB` | Subtle secondary sections |
-| `--color-primary` | `#5B4FE0` | **Brand Purple** — Primary buttons, active nav, links |
-| `--color-secondary` | `#2DBFA0` | **Teal Trust** — Success states, "Available" status, verified checkmarks |
-| `--color-accent-pink` | `#E85B94` | **Pink Commerce** — "Buy & Sell" tags, highlights |
-| `--color-accent-amber` | `#F5A742` | **Amber Generosity** — "Give Away" free tags, callouts |
-| `--color-text-primary` | `#1E1B2E` | Deep charcoal headings and body text |
-| `--color-text-secondary`| `#6B6779`| Subtext, metadata, and timestamps |
-| `--color-border` | `#E7E4F0` | Subtle card borders and dividers |
-
-### Typography Scale
-- **Headings**: `Fraunces` — Confident, editorial serif echoing case pitch decks.
-- **Body & UI**: `Plus Jakarta Sans` / `Inter` — High-legibility geometric sans.
-
----
-
-## 📊 Mock Data & In-Memory State Model
-
-All application data resides in a single, predictable `AppState` instance initialized from [`js/mockData.js`](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/mockData.js):
-
-### 12+ Pre-Seeded Campus Listings
-1. **Navy Blue Formal Blazer (Size 40/M)** *(Share / Formal Wear)* — Rohan K. (Hostel 3)
-2. **Texas Instruments TI-84 Plus CE Graphic Calculator** *(Share / Electronics)* — Jean R. (Hostel 2)
-3. **Term 1 Financial Accounting & Cheat Sheets** *(Give Away / Books & Notes)* — Haripriya M. (Hostel 1)
-4. **Kotler Marketing Management (16th Edition)** *(Sell - ₹450 / Books & Notes)* — Priya S. (Hostel 1)
-5. **Yonex Nanoray 10F Badminton Racket + Shuttles** *(Share / Sports Gear)* — Vikram A. (Sports Complex)
-6. **Excel Financial Modeling Coaching (1 hr)** *(Share / Skills & Coaching)* — Ananya D. (Library)
-7. **Insulated Stainless Steel 1L Water Bottles (Batch Lot)** *(Sell - ₹299 / Bulk Resale)* — Thirupathi M. (Verified Seller)
-8. **Magnetic Whiteboard Marker Set + Eraser** *(Give Away / Stationery)* — Priya S.
-9. **Casio FX-991EX ClassWiz Calculator** *(Share / Electronics)* — Jean R.
-10. **Case Competition Deck Review & Structure Feedback** *(Share / Skills)* — Jean R.
-11. **Classic Black Derby Formal Shoes (UK 8)** *(Share / Formal Wear)* — Rohan K.
-12. **Table Tennis Pro Bats Pair (Stiga Carbon)** *(Share / Sports Gear)* — Vikram A.
-
----
 
 ## 🔮 Product Roadmap & Future Architecture
 
@@ -450,76 +373,12 @@ Displayed inside the prototype via the **Roadmap Modal**:
 
 Because Peerly is built with **zero external dependencies and zero build tools**, it runs instantly on any machine.
 
-### Option 1: Direct File Opening
+### Direct File Opening
 Double-click [`index.html`](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/index.html) or open it in Chrome, Edge, Safari, or Firefox:
-```bash
-# Windows
-start index.html
 
-# Mac
-open index.html
 
-# Linux
-xdg-open index.html
-```
-
-### Option 2: Static Local Server (Optional)
-```bash
-# Using Python
-python -m http.server 8080
-
-# Using Node / npx
-npx serve .
-```
-
-### Demo Mode Affordances
+### Mode Affordances
 - **Persona Switcher**: Use the top bar dropdown to toggle between **Haripriya M.** (Seeker), **Jean R.** (Idle Owner), **Thirupathi M.** (Bulk Reseller), and **Rohan K.** (Peer Lender).
 - **Reset Demo Data**: Tap **"Reset Data"** in the demo bar at any time to reseed all original listings and chats.
 
 ---
-
-## 💼 Presentation & Grading Angle
-
-When presenting this prototype to faculty, judges, or reviewers, use this framing:
-
-> *"We deliberately scoped Peerly as a high-fidelity front-end click-through MVP rather than building premature backend infrastructure. At this stage of venture design, the primary risk is not technical feasibility — it is user trust, discoverability, and campus adoption. The prototype validates the full peer exchange experience, friction points, and social accountability mechanics before writing production code."*
-
----
-
-## 📁 Repository File Tree
-
-```
-peerly/
-├── index.html                     # Main single-page HTML with fonts and scripts
-├── styles.css                     # Design system (tokens, responsive layouts, animations)
-├── README.md                      # Comprehensive project documentation
-├── peerly-project-spec.md         # Source project specification
-├── diagrams/
-│   ├── onboarding-flow.puml       # PlantUML Onboarding & Verification Flow
-│   ├── persona-journeys.puml      # PlantUML Persona Interaction & Exchange Flows
-│   └── accountability-loop.puml   # PlantUML Closed-Loop Accountability Lifecycle
-└── js/
-    ├── icons.js                   # Reusable SVG line icon library
-    ├── mockData.js                # Pre-seeded users, 12+ listings, chats, roadmap
-    ├── state.js                   # In-memory reactive state manager
-    ├── router.js                  # Vanilla hash-based client-side router
-    ├── app.js                     # Main bootstrap script
-    ├── components/
-    │   ├── navbar.js              # Top navigation & demo bar
-    │   ├── modal.js               # Modal & chat drawer manager
-    │   ├── toast.js               # Toast notification system
-    │   └── footer.js              # Footer with Innovation Sandbox attribution
-    └── views/
-        ├── landing.js             # Pitch deck as a webpage
-        ├── onboarding.js          # 4-step onboarding wizard
-        ├── feed.js                # Live search & filter marketplace feed
-        ├── itemDetail.js          # Item detail, request flow, scripted chat
-        ├── newListing.js          # Under-60s rapid listing creation
-        └── profile.js             # My Peerly profile & accountability return flow
-```
-
----
-
-<div align="center">
-  <sub>Built with ❤️ for the <strong>Innovation Sandbox</strong> · Great Lakes Institute of Management (GLIM Chennai)</sub>
-</div>
