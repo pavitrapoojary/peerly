@@ -149,43 +149,6 @@ sequenceDiagram
     UI-->>Student: Lands on Home Feed (#/feed)
 ```
 
-#### 📄 PlantUML Source Code (`diagrams/onboarding-flow.puml`):
-```plantuml
-@startuml OnboardingFlow
-!theme plain
-skinparam backgroundColor #FAFAF8
-skinparam roundcorner 12
-skinparam sequenceArrowThickness 2
-skinparam defaultFontName "Plus Jakarta Sans"
-
-actor "MBA Student" as Student
-participant "UI Router\n(#/onboarding)" as UI
-participant "Verification Engine\n(Simulated)" as Verify
-participant "State Store\n(appState)" as State
-
-Student -> UI : Opens App / Taps "Get Started"
-UI -> Student : Step 1: Displays searchable list of residential B-schools
-Student -> UI : Selects "GLIM Chennai"
-UI -> Student : Step 2: Prompts .edu email (@greatlakes.edu.in)
-Student -> UI : Enters email & taps "Send OTP"
-UI -> Verify : Sends simulated OTP (4829)
-Student -> UI : Enters 4-digit OTP
-Verify -> Verify : 600ms simulated check
-Verify --> UI : Email Verified Successfully
-UI -> Student : Step 3: Prompts optional ID card upload
-alt Uploads ID
-    Student -> UI : Attaches ID photo
-    UI -> State : Sets isVerifiedSeller = true
-else Skips
-    Student -> UI : Taps "Skip for now"
-    UI -> State : Standard Verified Student
-end
-UI -> Student : Step 4: Celebration modal ("Verified at GLIM")
-Student -> UI : Taps "Explore Campus Feed"
-UI --> Student : Redirects to Home Feed (#/feed)
-@enduml
-```
-
 ---
 
 ### Flow 2: Persona User Journeys (Seeker, Owner, Reseller)
@@ -231,33 +194,6 @@ sequenceDiagram
     Profile->>Profile: Condition Check: "Returned in good condition?" (Yes)
     Profile->>Profile: Peer Rating: "Rate Jean: 👍 / 👎" (Thumbs Up)
     Profile->>Profile: Updates Trust Score (👍 19, 100%) & clears borrow
-```
-
-#### 📄 PlantUML Source Code (`diagrams/persona-journeys.puml`):
-```plantuml
-@startuml PersonaJourneys
-!theme plain
-skinparam backgroundColor #FAFAF8
-skinparam roundcorner 12
-skinparam sequenceArrowThickness 2
-
-actor "Haripriya (Seeker)" as Seeker
-actor "Jean (Idle Owner)" as Owner
-actor "Thirupathi (Reseller)" as Reseller
-participant "Campus Feed" as Feed
-participant "Item Detail" as Detail
-participant "Trust Engine" as Trust
-
-Owner -> Detail : Rapid Create Listing (<60s) -> Mode: Share
-Detail -> Feed : Item appears live at top of Feed
-Seeker -> Feed : Searches "Blazer" -> Opens listing
-Seeker -> Detail : Taps "Request to Borrow" -> Accepted!
-Detail -> Seeker : Shows Return-by Date: "Thursday, 6:00 PM"
-Seeker -> Trust : "My Peerly" -> Taps "Mark as Returned"
-Trust -> Trust : Step 1: Condition Check (Good/Damage)
-Trust -> Trust : Step 2: Rate Owner (👍 / 👎)
-Trust -> Trust : Updates Campus Trust Score!
-@enduml
 ```
 
 ---
