@@ -10,11 +10,11 @@ const LandingView = {
         </div>
 
         <h1 class="hero-title">
-          Everything campus. <span class="gradient-text">One app.</span>
+          Your campus, <span class="gradient-text">fully connected.</span>
         </h1>
 
         <p class="hero-subtitle">
-          Buy, sell, or borrow from batchmates. Meet people worth knowing. Find teammates. Never miss a deadline that matters to you.
+          Borrow and trade with verified peers, swap skills across departments, team up for competitions, and discover opportunities curated for you.
         </p>
 
         <div class="hero-cta-group">
@@ -34,7 +34,7 @@ const LandingView = {
           </a>
           <a href="#/connect" class="hero-pillar-badge" title="Connect">
             <span class="hero-pillar-icon" style="color: var(--color-accent-blue);">${Icons.users(16)}</span>
-            <span class="hero-pillar-name"><strong>Connect</strong> · Meet Batchmates & Swap Skills</span>
+            <span class="hero-pillar-name"><strong>Connect</strong> · Meet Peers & Swap Skills</span>
           </a>
           <a href="#/community" class="hero-pillar-badge" title="Community Board">
             <span class="hero-pillar-icon" style="color: var(--color-accent-amber);">${Icons.messageCircle(16)}</span>
