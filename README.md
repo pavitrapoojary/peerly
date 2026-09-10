@@ -1,29 +1,29 @@
 # 🎓 Peerly v2 — The Campus Operating System
 **"Your Campus, Fully Connected."**
 
-> **Peerly v2** evolves beyond a tangible goods marketplace into a unified **Campus Operating System**. Rooted in residential MBA design research, Peerly completes all four exchange pillars: **Things** (Marketplace & Reverse Needs), **Skills** (Connect Hub & Biweekly Peer Pairing), **Help** (Community Board & Team-Ups), and **Knowledge** (Personalized Opportunities Radar).
+> **Peerly v2** is a comprehensive **Campus Operating System** engineered for colleges, universities, and higher education institutions worldwide. Built on deep campus research, Peerly integrates all four student exchange pillars into a single trusted, closed-network platform: **Things** (Marketplace & Reverse Needs), **Skills** (Connect Hub & Biweekly Peer Pairing), **Help** (Community Board & Team-Ups), and **Knowledge** (Personalized Opportunities Radar).
 
 [![Prototype Status](https://img.shields.io/badge/Prototype-v2%20Fully%20Interactive-5B4FE0?style=for-the-badge&logo=appveyor)](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/index.html)
 [![Stack](https://img.shields.io/badge/Stack-Vanilla%20HTML5%20%7C%20CSS3%20%7C%20ES6%20JS-2DBFA0?style=for-the-badge)](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/styles.css)
-[![Campus Coverage](https://img.shields.io/badge/Campus-GLIM%20Chennai%20%7C%20IIMB%20%7C%20ISB%20%7C%20XLRI%20%7C%20SPJIMR-E85B94?style=for-the-badge)](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/mockData.js)
+[![Campus Coverage](https://img.shields.io/badge/Campus-Universities%20%7C%20Colleges%20%7C%20Institutes-E85B94?style=for-the-badge)](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/mockData.js)
 [![Spec Reference](https://img.shields.io/badge/Spec-Peerly%20v2%20Spec-F5A742?style=for-the-badge)](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/peerly-v2-spec.md)
 
 ---
 
 ## 📌 Table of Contents
 
-1. [🌟 Executive Summary & The v2 Thesis](#-executive-summary--the-v2-thesis)
-2. [🏛️ The 4 Product Pillars (Completed from Research)](#️-the-4-product-pillars)
+1. [🌟 Executive Summary & The Generic Campus Thesis](#-executive-summary--the-generic-campus-thesis)
+2. [🏛️ The 4 Product Pillars (Universal Student Exchange)](#️-the-4-product-pillars)
 3. [🏗️ System Architecture & Interactive Diagrams](#️-system-architecture--interactive-diagrams)
    - [3.1 High-Level Component & Data Flow Architecture](#31-high-level-component--data-flow-architecture)
-   - [3.2 5-Step Enriched Onboarding & Trust Verification](#32-5-step-enriched-onboarding--trust-verification)
+   - [3.2 5-Step Enriched Onboarding & Institutional Verification](#32-5-step-enriched-onboarding--institutional-verification)
    - [3.3 Dual-Track Marketplace & Reverse Needs Engine](#33-dual-track-marketplace--reverse-needs-engine)
    - [3.4 Closed-Loop Campus Accountability State Machine](#34-closed-loop-campus-accountability-state-machine)
    - [3.5 Connect Hub & Peer Pairing Coffee Roulette](#35-connect-hub--peer-pairing-coffee-roulette)
    - [3.6 Opportunities Radar Client-Side Matching Engine](#36-opportunities-radar-client-side-matching-engine)
    - [3.7 Community Board Team-Up Lifecycle](#37-community-board-team-up-lifecycle)
-4. [🚀 Feature Specifications & Implementation Details](#-feature-specifications--implementation-details)
-5. [🔄 Concrete Personas & Step-by-Step Simulation Examples](#-concrete-personas--step-by-step-simulation-examples)
+4. [🚀 Universal Feature Specifications & Implementation](#-universal-feature-specifications--implementation)
+5. [🔄 Multi-Disciplinary Personas & Simulation Walkthroughs](#-multi-disciplinary-personas--simulation-walkthroughs)
 6. [💻 Technical Implementation & Code Examples](#-technical-implementation--code-examples)
 7. [📊 Mock Data Schema & Pre-Seeded Inventory](#-mock-data-schema--pre-seeded-inventory)
 8. [📂 PlantUML Diagram Suite (.puml Files)](#-plantuml-diagram-suite-puml-files)
@@ -32,44 +32,45 @@
 
 ---
 
-## 🌟 Executive Summary & The v2 Thesis
+## 🌟 Executive Summary & The Generic Campus Thesis
 
-### 1.1 The Differentiation Problem
-Single-category campus exchange apps (such as Jugarr or OLX) focus almost exclusively on tangible goods. However, residential MBA life operates on a multi-dimensional social and intellectual network:
-1. **Trade physical assets** (blazers, TI-84 calculators, case study printouts, monitors).
-2. **Network across domains** (engineers meeting finance specialists, consultants meeting marketers).
-3. **Ask for agile peer help** (case competition partners, SOP reviews, hostel favors).
-4. **Track high-stakes deadlines** (hackathons, national case challenges, scholarships).
+### 1.1 The Universal Campus Friction
+On virtually every college, institute, or university campus (engineering, design, arts, medicine, law, or business), resource exchange and student networking are fragmented:
+- **Idle Assets:** Thousands of textbooks, graphing calculators, lab equipment, monitors, cameras, sports gear, and interview attire sit idle in dorms and hostels.
+- **Disconnected Talent:** Students lack a low-friction way to discover cross-departmental peers (e.g., engineers seeking designers for hackathons, marketers seeking financial modelers, researchers seeking coders).
+- **Buried Requests:** WhatsApp/Telegram batch groups are noisy, lossy, and unsearchable. An ask posted at noon is buried under 300 messages by evening.
+- **Accountability Vacuum:** Informal lending between peers suffers from awkward reminders and lost items due to zero return tracking.
+- **Opportunity FOMO:** National hackathons, case competitions, fellowships, and grants are scattered across dozens of portals (Unstop, LinkedIn, university notice boards), leading to missed deadlines.
 
 ```
-                        TRADITIONAL MARKETPLACE (v1 / Jugarr / OLX)
-                                   ┌──────────────┐
-                                   │    Things    │
-                                   └──────────────┘
-                                          │
-                                          ▼
-                         PEERLY v2 CAMPUS OPERATING SYSTEM
-                    ┌─────────────────────┬─────────────────────┐
-                    │       Things        │       Skills        │
-                    │ (Marketplace+Needs) │  (Connect Pairing)  │
-                    ├─────────────────────┼─────────────────────┤
-                    │        Help         │      Knowledge      │
-                    │  (Community Board)  │ (Opportunities Radar│
-                    └─────────────────────┴─────────────────────┘
+                          GENERIC CLASSIFIEDS (OLX / Jugarr / WhatsApp)
+                                    ┌──────────────┐
+                                    │    Things    │
+                                    └──────────────┘
+                                           │
+                                           ▼
+                           PEERLY v2 CAMPUS OPERATING SYSTEM
+                     ┌─────────────────────┬─────────────────────┐
+                     │       Things        │       Skills        │
+                     │ (Marketplace+Needs) │  (Connect Pairing)  │
+                     ├─────────────────────┼─────────────────────┤
+                     │        Help         │      Knowledge      │
+                     │  (Community Board)  │ (Opportunities Radar│
+                     └─────────────────────┴─────────────────────┘
 ```
 
-> **Positioning Statement:** *Peerly isn't another campus marketplace app. It's the one place a student opens for anything campus-related — trade what you have, meet who you should know, ask for help when you're stuck, and find out what opportunities you're eligible for — instead of four different WhatsApp groups, three different apps, and a lot of luck.*
+> **Universal Positioning Statement:** *Peerly isn't just a campus buy-and-sell board. It is the single operating system a student opens for everything campus-related — trade what you have, meet who you should know across departments, ask for help when you're stuck, and discover every opportunity you're eligible for — instead of five chaotic WhatsApp groups, three disjointed apps, and a lot of luck.*
 
 ---
 
 ## 🏛️ The 4 Product Pillars
 
-| Research Pillar | v1 Status | v2 Product Surface | Core Mechanism | Technical Implementation |
+| Pillar | Campus Problem Solved | Product Surface | Core Mechanism | Technical Implementation |
 |---|---|---|---|---|
-| **Things** | ✅ Built | [Marketplace & Needs Feed](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/feed.js) | Dual-track feed: Browse items + Reverse "Looking For" needs with duplicate detection nudge and "I Have This" handoff. | [feed.js](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/feed.js), [itemDetail.js](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/itemDetail.js), [newListing.js](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/newListing.js) |
-| **Skills** | Named only | [Connect & Pairing Hub](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/connect.js) | Profile skill exchange ("People to learn from" + "People like you") + Zero-effort biweekly Peer Pairing ("Coffee Roulette"). | [connect.js](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/connect.js), [modal.js](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/components/modal.js) |
-| **Help** | Named only | [Community Board](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/community.js) | Case competition `🤝 Team-Up` with live batchmate interest roster, `🙋 Ask / Favor` requests, and `📢 Announcement` milestones. | [community.js](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/community.js), [modal.js](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/components/modal.js) |
-| **Knowledge** | Named only | [Opportunities Radar](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/opportunities.js) | Authentic client-side personalization engine filtering 15+ curated competitions against user tags with 7-day "Closing Soon" alert badges. | [opportunities.js](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/opportunities.js), [state.js](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/state.js) |
+| **Things** | Idle dorm gear & hidden campus supply | [Marketplace & Needs Feed](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/feed.js) | Dual-track feed: Browse items + Reverse "Looking For" needs with live duplicate detection nudge and "I Have This" handoff. | [feed.js](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/feed.js), [itemDetail.js](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/itemDetail.js), [newListing.js](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/newListing.js) |
+| **Skills** | Siloed departments & networking awkwardness | [Connect & Pairing Hub](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/connect.js) | Cross-domain skill exchange ("People to learn from" + "People like you") + Zero-effort biweekly Peer Pairing ("Coffee Roulette"). | [connect.js](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/connect.js), [modal.js](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/components/modal.js) |
+| **Help** | Fragmented hackathon teaming & favor requests | [Community Board](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/community.js) | Competition & Hackathon `🤝 Team-Up` with live batchmate interest roster, `🙋 Ask / Favor` requests, and `📢 Announcement` milestones. | [community.js](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/community.js), [modal.js](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/components/modal.js) |
+| **Knowledge** | Scattered deadlines & opportunity discovery | [Opportunities Radar](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/opportunities.js) | Client-side tag-matching engine filtering 15+ curated competitions, grants, and internships against student interests with 7-day "Closing Soon" badges. | [opportunities.js](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/views/opportunities.js), [state.js](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/state.js) |
 
 ---
 
@@ -109,11 +110,12 @@ graph TD
     end
 
     subgraph Mock_Data_Store["In-Memory Data Models (js/mockData.js)"]
-        MUsers["MOCK_USERS (6 Personas)"]
+        MUsers["MOCK_USERS (Diverse Student Profiles)"]
         MListings["MOCK_LISTINGS (12 Items)"]
         MNeeds["MOCK_NEEDS (6 Requests)"]
         MOpps["MOCK_OPPORTUNITIES (15 Entries)"]
         MPosts["MOCK_COMMUNITY_POSTS (8 Posts)"]
+        MCampus["MOCK_CAMPUSES (Tech, Design, Arts, Mgmt)"]
         MChats["MOCK_CHAT_SCRIPTS"]
     end
 
@@ -130,49 +132,49 @@ graph TD
 
 ---
 
-### 3.2 5-Step Enriched Onboarding & Trust Verification
+### 3.2 5-Step Enriched Onboarding & Institutional Verification
 
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Student as MBA Student
+    actor Student as College / University Student
     participant UI as Router / Onboarding (#/onboarding)
-    participant Engine as Simulated Verification Engine
+    participant Engine as Verification Engine (Simulated)
     participant State as AppState (In-Memory)
 
     Student->>UI: Taps "Get Started" on Landing
     Note over UI: Step 1: Campus Selection
-    UI->>Student: Displays searchable B-schools (GLIM Chennai pre-selected, IIMB, ISB, XLRI)
-    Student->>UI: Confirms "GLIM Chennai"
-    UI->>State: Sets selectedCampus = GLIM Chennai (@greatlakes.edu.in)
+    UI->>Student: Displays searchable institutions (GLIM, IIT Madras, BITS Pilani, Ashoka, NID, NLSIU, IIMB)
+    Student->>UI: Selects their institution
+    UI->>State: Sets selectedCampus & domain context (@greatlakes.edu.in, @iitm.ac.in, etc.)
 
-    Note over UI: Step 2: Campus .edu Email OTP
+    Note over UI: Step 2: Institutional .edu Email OTP
     UI->>Student: Prompts for student email
-    Student->>UI: Submits haripriya.m@greatlakes.edu.in
+    Student->>UI: Submits student.name@domain.edu
     UI->>Engine: Dispatches 4-digit OTP (Code: 4829)
-    Student->>UI: Enters OTP in auto-advancing boxes
+    Student->>UI: Enters OTP in auto-advancing input boxes
     UI->>Engine: Simulates validation spinner (600ms)
     Engine-->>UI: Verified! (user.verified = true)
 
     Note over UI: Step 3: Background & Radar Profile Setup
-    UI->>Student: Prompts Cohort (PGP 2026), Background (Marketing), Skills (GTM), & Radar Interests (Finance, PM)
+    UI->>Student: Prompts Cohort (2026/2027), Specialization (Engineering/Design/Marketing/Finance), Skills, & Radar Target Interests
     Student->>UI: Customizes tag selections
     UI->>State: Stores batch, background, skills, and target interests
 
     Note over UI: Step 4: Student ID Upload (Optional)
-    UI->>Student: Prompts ID Card upload for "Verified Seller" badge
-    alt Uploads ID Card
-        Student->>UI: Uploads ID photo (glim_id.png)
+    UI->>Student: Prompts Student ID card upload for "Verified Seller" badge
+    alt Uploads Student ID
+        Student->>UI: Uploads ID photo (student_id.png)
         UI->>State: Sets user.isVerifiedSeller = true
     else Skips Step
         Student->>UI: Taps "Skip for now"
     end
 
     Note over UI: Step 5: You're In! Celebration
-    UI->>Student: Renders celebration screen with campus badge + personalized match teaser
+    UI->>Student: Renders celebration modal with verified campus badge + tailored opportunity preview
     Student->>UI: Taps "Explore Campus Feed"
     UI->>State: Calls completeOnboarding()
-    UI-->>Student: Navigates to Marketplace (#/feed)
+    UI-->>Student: Navigates to Marketplace (#/feed) with full privileges
 ```
 
 ---
@@ -181,18 +183,18 @@ sequenceDiagram
 
 ```mermaid
 flowchart TD
-    Start["User Opens Marketplace (#/feed)"] --> TabChoice{"Select Primary Tab"}
+    Start["Student Opens Marketplace (#/feed)"] --> TabChoice{"Select Primary Tab"}
     
-    TabChoice -->|Tab 1: Browse Items| BrowseFeed["Browse 12+ Available Items"]
-    BrowseFeed --> FilterMode["Filter by Mode: All | Borrow | Buy | Give"]
-    BrowseFeed --> SearchItems["Live Search: 'Blazer', 'Calculator', 'Notes'"]
+    TabChoice -->|Tab 1: Browse Items| BrowseFeed["Browse 12+ Available Campus Items"]
+    BrowseFeed --> FilterMode["Filter Mode: All | Borrow | Buy | Give"]
+    BrowseFeed --> SearchItems["Live Search: 'Blazer', 'Calculator', 'Notes', 'Racket'"]
     BrowseFeed --> ItemCard["Click Item Card (#/item/:id)"]
     ItemCard --> BorrowReq["Tap 'Request to Borrow' / 'Buy Now'"]
     BorrowReq --> AcceptModal["Simulated Accept Modal (Return-by Date Calculated)"]
     AcceptModal --> OpenChat["Open Universal Scripted Chat Drawer"]
 
     TabChoice -->|Tab 2: Campus Needs| NeedsFeed["Campus Needs (Looking For) Feed"]
-    NeedsFeed --> NeedCard["View Need: 'Bluetooth Speaker' by Haripriya"]
+    NeedsFeed --> NeedCard["View Need: 'Bluetooth Speaker for Fest'"]
     NeedCard --> HaveThis["Owner Taps 'I Have This'"]
     HaveThis --> HandoffChat["Opens Scripted Chat Drawer with Seeker"]
 
@@ -212,7 +214,7 @@ flowchart TD
 
 ```mermaid
 stateDiagram-v2
-    [*] --> ItemAvailable : Owner lists item in <60s
+    [*] --> ItemAvailable : Student lists item in <60s
     
     state ItemAvailable {
         [*] --> FeedVisible
@@ -220,7 +222,7 @@ stateDiagram-v2
         FeedVisible : Badge = "Share / Available"
     }
 
-    ItemAvailable --> RequestAccepted : Seeker taps "Request to Borrow"
+    ItemAvailable --> RequestAccepted : Peer taps "Request to Borrow"
     
     state RequestAccepted {
         [*] --> SetReturnDate
@@ -229,7 +231,7 @@ stateDiagram-v2
         SetReturnDate : Scripted chat drawer opened
     }
 
-    RequestAccepted --> ActiveBorrow : Physical pickup at hostel room
+    RequestAccepted --> ActiveBorrow : Physical handoff at dorm/campus lobby
     
     state ActiveBorrow {
         [*] --> ActiveTimer
@@ -237,7 +239,7 @@ stateDiagram-v2
         ActiveTimer : Reminder: "Return by tomorrow, 6:00 PM"
     }
 
-    ActiveBorrow --> ConditionCheck : Seeker taps "Mark as Returned"
+    ActiveBorrow --> ConditionCheck : Borrower taps "Mark as Returned"
     
     state ConditionCheck {
         [*] --> InspectItem
@@ -273,14 +275,14 @@ stateDiagram-v2
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Haripriya as Haripriya (Marketing & Strategy)
+    actor Haripriya as Haripriya (Strategy & Marketing)
     participant Connect as Connect View (#/connect)
     participant Engine as Peer Matching Engine
     actor Meera as Meera K. (Finance Lead)
 
     Haripriya->>Connect: Opens Connect Hub
     Connect->>Engine: Evaluates Haripriya's interests: ['Finance', 'Consulting']
-    Engine->>Engine: Scans cohort skills for matches
+    Engine->>Engine: Scans student cohort skills for matches
     Engine-->>Connect: Renders "People to Learn From" Rail
     Note over Connect: "Meera K. (Finance) can help with: Excel modeling, Valuation basics"
     
@@ -292,7 +294,7 @@ sequenceDiagram
     Haripriya->>Connect: Taps "Simulate This Week's Pairing"
     Connect->>Engine: Runs bipartite pairing algorithm
     Engine-->>Connect: Matches Haripriya with Meera K.
-    Connect-->>Haripriya: Displays match card with shared icebreaker: "You both follow Consulting — discuss the Bain case!"
+    Connect-->>Haripriya: Displays match card with shared icebreaker: "You both follow Strategy — discuss the Bain case!"
 ```
 
 ---
@@ -301,10 +303,10 @@ sequenceDiagram
 
 ```mermaid
 graph LR
-    subgraph Profile_Inputs["User Profile State"]
-        Cohort["Batch: PGP 2026"]
-        Background["Background: Marketing, Strategy"]
-        Interests["🎯 Target Interests: Finance, Consulting, PM, Analytics"]
+    subgraph Profile_Inputs["Student Profile State"]
+        Cohort["Cohort: 2026"]
+        Background["Background: Marketing, Design, Strategy"]
+        Interests["🎯 Target Interests: Finance, Consulting, PM, AI"]
     end
 
     subgraph Radar_Engine["Radar Personalization Engine (js/state.js)"]
@@ -313,12 +315,12 @@ graph LR
         Score["Match Score:\n(sharedTags / totalTags) * 100"]
     end
 
-    subgraph Opportunities_Database["15+ Curated Opportunities"]
-        O1["Bain Strategy Challenge (Consulting, Strategy)"]
-        O2["Swiggy APM Case Challenge (Product, Tech)"]
-        O3["Tata Imagination Challenge (Strategy, Innovation)"]
-        O4["Goldman Sachs Equity Research (Finance)"]
-        O5["Reliance Retail Operations (Operations)"]
+    subgraph Opportunities_Database["15+ Curated Multi-Disciplinary Opportunities"]
+        O1["National Product Case Challenge (Product, Tech)"]
+        O2["Tata Crucible Campus Quiz & Hackathon (Strategy)"]
+        O3["Google Summer APM Internship (Product, AI)"]
+        O4["Goldman Sachs Investment Research (Finance)"]
+        O5["L'Oréal Brandstorm Innovation (Marketing, Design)"]
     end
 
     Profile_Inputs --> Filter
@@ -340,11 +342,11 @@ sequenceDiagram
     autonumber
     actor Rohan as Rohan K. (Author)
     participant Board as Community Board (#/community)
-    actor Haripriya as Haripriya (Batchmate)
+    actor Haripriya as Haripriya (Peer)
     participant State as AppState (communityPosts)
 
     Rohan->>Board: Taps "Post to Community"
-    Rohan->>Board: Selects Type: 🤝 Team-Up, Title: "Need 1 more for CaseComp Nationals", Skill: "Marketing / GTM"
+    Rohan->>Board: Selects Type: 🤝 Team-Up, Title: "Need 1 more for CaseComp / Hackathon", Skill: "Marketing & GTM"
     Board->>State: Appends new post to communityPosts
     Board-->>Rohan: Displays live post on feed
 
@@ -357,25 +359,25 @@ sequenceDiagram
 
 ---
 
-## 🚀 Feature Specifications & Implementation Details
+## 🚀 Universal Feature Specifications & Implementation
 
 ### 1. Pillar 1: Things — Marketplace & Reverse Needs Engine
 - **Dual-Track Feed Tabs:** Seamless switching between **"Browse Available Items"** (12+ items) and **"Campus Needs (Looking For)"** (6+ requests).
 - **Reverse Seeker Requests:** Students post what they are seeking with needed-by dates and terms (`Borrow Only`, `Willing to Pay`, `Either`).
-- **"I Have This" Instant Response:** Any verified batchmate can respond to a Need card, instantly launching a scripted handoff chat without needing an existing listing.
+- **"I Have This" Instant Response:** Any verified student can respond to a Need card, instantly launching a scripted handoff chat without needing an existing listing.
 - **Simulated Duplicate Match Nudge:** Live typing during Need creation runs a substring/category match against active inventory. If an item exists, an amber alert banner guides the user to the existing listing.
 
 ### 2. Pillar 2: Skills — Connect Hub & Peer Pairing
-- **"People to Learn From" Rail:** Dynamic cohort cards displaying batchmates whose skills fulfill your learning interests, complete with an explanation (*"Meera (Finance) can help with: Excel modeling, Valuation basics"*).
-- **"People Like You" Rail:** Overlapping batch and specialization peers for study circles.
+- **"People to Learn From" Rail:** Dynamic student cards displaying peers whose skills match your stated learning interests, complete with an explanation (*"Meera (Finance) can help with: Excel modeling, Valuation basics"*).
+- **"People Like You" Rail:** Overlapping cohort and specialization peers for study circles and projects.
 - **Zero-Effort Peer Pairing ("Coffee Roulette"):** Biweekly opt-in toggle + "Simulate This Week's Pairing" demo trigger with mutual icebreakers.
 - **Interactive Skill/Interest Customizer:** Modal allowing real-time edits to user skills and radar interests.
 
 ### 3. Pillar 3: Help — Community Board
 - **Three Core Post Types:**
-  - `🤝 Team-Up`: Form case competition or hackathon teams with role requirements, deadline trackers, and an interactive **"I'm Interested"** batchmate roster.
-  - `🙋 Ask / Favor`: Informal requests for SOP reviews, mock interviews, or lost item recovery.
-  - `📢 Announcement`: Cohort achievements, club webinars, and podcast releases.
+  - `🤝 Team-Up`: Form case competition, research, or hackathon teams with role requirements, deadline trackers, and an interactive **"I'm Interested"** batchmate roster.
+  - `🙋 Ask / Favor`: Informal requests for SOP reviews, mock interviews, lab notes, or lost item recovery.
+  - `📢 Announcement`: Campus achievements, club webinars, podcast releases, and student initiatives.
 - **Interactive Emoji Reactions:** Real-time reaction counters for 👍 Thumbs Up, 🎉 Celebrate, and 🔥 Fire.
 
 ### 4. Pillar 4: Knowledge — Personalized Opportunities Radar
@@ -386,9 +388,9 @@ sequenceDiagram
 
 ---
 
-## 🔄 Concrete Personas & Step-by-Step Simulation Examples
+## 🔄 Multi-Disciplinary Personas & Simulation Walkthroughs
 
-Use the top **Persona Demo Bar** to switch between pre-seeded personas and observe how the entire platform adapts dynamically:
+Use the top **Persona Demo Bar** to switch between pre-seeded personas representing diverse campus disciplines:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -398,20 +400,20 @@ Use the top **Persona Demo Bar** to switch between pre-seeded personas and obser
 
 ### Persona Matrix
 
-| ID | Persona | Role & Specialization | Skills Offered | Target Interests | Key Simulation Role |
+| ID | Persona | Specialization & Focus | Skills Offered | Target Interests | Key Simulation Role |
 |---|---|---|---|---|---|
-| `u_me` | **Haripriya M.** | 1st Year PGPM (Marketing & Strategy) | GTM Strategy, Pitch Decks, Public Speaking | Finance, Consulting, PM, Analytics | Demand Seeker, Case Competition Competitor, Peer Learner |
-| `u_jean` | **Jean R.** | 2nd Year PGPM (Finance) | Excel modeling, DCF Analysis, Corporate Tax | Consulting, Venture Capital, Fintech | Passive Idle Owner (Lends TI-84 & Textbooks) |
-| `u_meera` | **Meera K.** | PGPM (Finance Club Lead) | Valuation basics, LBO Modeling, M&A | Product Management, AI Tools, Consulting | Skill Mentor, Coffee Roulette Partner |
-| `u_thiru` | **Thirupathi M.** | 2nd Year PGPM (Operations) | Six Sigma, Vendor Sourcing, Logistics | E-Commerce, Retail Tech, Operations | Verified Bulk Reseller (Water Bottles & Essentials) |
-| `u_rohan` | **Rohan K.** | PGPM Cohort 2026 (Consulting Club) | Case Structuring, Guesstimates | Strategy, Tech Consulting | CaseComp Team Lead, Blazer Lender |
-| `u_ananya` | **Ananya S.** | 1st Year PGPM (Tech & Analytics) | Python, SQL, Tableau, Figma | Product Management, UI/UX, AI | Hackathon Partner, SOP Reviewer |
+| `u_me` | **Haripriya M.** | Strategy & Marketing | GTM Strategy, Pitch Decks, Public Speaking | Finance, Consulting, PM, Analytics | Demand Seeker, Case Competitor, Peer Learner |
+| `u_jean` | **Jean R.** | Economics & Finance | Excel modeling, DCF Analysis, Corporate Tax | Consulting, Venture Capital, Fintech | Passive Idle Owner (Lends TI-84 & Textbooks) |
+| `u_meera` | **Meera K.** | Finance & Investments | Valuation basics, LBO Modeling, M&A | Product Management, AI Tools, Consulting | Skill Mentor, Coffee Roulette Partner |
+| `u_thiru` | **Thirupathi M.** | Operations & Supply Chain | Six Sigma, Vendor Sourcing, Logistics | E-Commerce, Retail Tech, Operations | Verified Bulk Reseller (Water Bottles & Essentials) |
+| `u_rohan` | **Rohan K.** | Consulting & Strategy | Case Structuring, Guesstimates | Strategy, Tech Consulting | CaseComp Team Lead, Blazer Lender |
+| `u_priya` | **Priya S.** | Design & Digital Media | Figma Prototyping, UI/UX, Copywriting | Product Management, Design, Marketing | Creative Designer, Textbook Seller |
 
 ---
 
-### Step-by-Step Interactive Walkthrough Examples
+### Step-by-Step Simulation Examples
 
-#### Example 1: Haripriya Borrows a Navy Blazer for Case Finals (Pillar: Things)
+#### Example 1: Borrowing Formal Attire for Final Presentations (Pillar: Things)
 1. Navigate to **Marketplace** (`#/feed`). Ensure the **"Browse Available Items"** tab is active.
 2. Type `"Blazer"` into the search bar or click the **"Formal Wear"** category chip.
 3. Click on the listing **"Navy Blue Formal Blazer (Size 40 / M)"** (`#/item/l1`).
@@ -421,36 +423,36 @@ Use the top **Persona Demo Bar** to switch between pre-seeded personas and obser
    - *Return-by Date:* **Tomorrow, 6:00 PM**
 6. Click **"Open Scripted Chat"**. Review the pre-scripted handoff dialog coordinating a lobby pickup at Hostel 3.
 
-#### Example 2: Haripriya Posts a Reverse Need with Duplicate Detection (Pillar: Things)
+#### Example 2: Reverse Need with Duplicate Detection (Pillar: Things)
 1. On the Marketplace feed, click **"Post a Need"** or switch to the **"Campus Needs"** tab.
 2. In the modal, type `"TI-84 Calculator"` in the title field.
 3. Observe the live **Duplicate Detection Nudge Banner**:
    > *"Good news — Jean R. already listed 'TI-84 Plus CE Graphing Calculator' for borrow! Check existing listings before posting."*
-4. Change the title to `"Bluetooth Speaker for Hostel Terrace"`, set Needed-by Date to `2026-09-14`, select `"Borrow Only"`, and submit.
+4. Change the title to `"Bluetooth Speaker for Campus Terrace"`, set Needed-by Date to `2026-09-14`, select `"Borrow Only"`, and submit.
 5. The new card immediately appears at the top of the **Campus Needs** feed.
 6. Switch persona to **Jean R.** -> Jean sees the need and can tap **"I Have This"** to open a handoff chat.
 
-#### Example 3: Skill Swap & Coffee Roulette (Pillar: Skills)
+#### Example 3: Cross-Department Skill Swap & Coffee Roulette (Pillar: Skills)
 1. Navigate to **Connect** (`#/connect`).
 2. Observe the **"People to Learn From"** rail. Because Haripriya's interests include *Finance*, Meera K. and Jean R. appear with reason pills:
    - *"Meera K. (Finance) can help with: Excel modeling, Valuation basics"*
 3. Click **"Say Hi"** on Meera's card to launch the peer chat starter.
 4. In the **Peer Pairing ("Coffee Roulette")** section, click **"Simulate This Week's Pairing"**.
-5. The preview card updates with paired batchmate Meera K., the mutual topic (*Consulting & Strategy*), and a conversation prompt (*"Discuss the Bain Case Challenge!"*).
+5. The preview card updates with paired peer Meera K., the mutual topic (*Finance & Valuation Modeling*), and an icebreaker prompt (*"Ask Meera about her breakdown of the Bajaj Auto valuation case!"*).
 
-#### Example 4: Case Competition Team-Up (Pillar: Help)
+#### Example 4: Case Competition / Hackathon Team-Up (Pillar: Help)
 1. Navigate to **Community Board** (`#/community`).
 2. Filter by the **"🤝 Team-Ups"** chip.
 3. Locate post `c1`: *"Need 1 more for CaseComp Nationals (Marketing / GTM focus)"* by Rohan K.
-4. Click **"I'm Interested"**. The button updates to **"✓ Interested"**, a success toast fires, and Haripriya's avatar appears in the live roster of interested batchmates.
+4. Click **"I'm Interested"**. The button updates to **"✓ Interested"**, a success toast fires, and Haripriya's avatar appears in the live roster of interested students.
 5. Click **"Post to Community"** to open the composer and publish a new Ask or Announcement.
 
 #### Example 5: Opportunities Radar Personalization (Pillar: Knowledge)
 1. Navigate to **Opportunities** (`#/opportunities`).
 2. Observe that the **"Recommended for You"** section highlights:
-   - *Bain & Company Strategy Challenge* (Tags: Consulting, Strategy)
-   - *Swiggy APM Case Challenge* (Tags: Product, Tech)
-   - *Goldman Sachs Campus Equity Research* (Tags: Finance, Markets)
+   - *National Product Case Challenge* (Tags: Product, Strategy)
+   - *Google Summer APM Intern* (Tags: Product, AI Tools)
+   - *Goldman Sachs Investment Research* (Tags: Finance, Markets)
 3. Notice the animated amber **"Closing in 3 days"** badge on urgent competitions.
 4. Click **"Customize My Radar Tags"**, add `"Fintech"`, and click save. Watch the feed re-filter immediately in real-time.
 
@@ -594,11 +596,12 @@ window.addEventListener("DOMContentLoaded", handleRoute);
                           └─────────────────────┘
 ```
 
-- **Users (`MOCK_USERS`):** 6 detailed profiles with batch, specialization, verified flags, ratings, bio, skills, and target interests.
+- **Campuses (`MOCK_CAMPUSES`):** Multi-disciplinary coverage across engineering, management, design, liberal arts, and sciences (GLIM, IIT Madras, BITS Pilani, Ashoka University, NID, IIM Bangalore, NLSIU).
+- **Users (`MOCK_USERS`):** 6 diverse profiles with batch year, specialization, verified flags, ratings, bio, skills, and target interests.
 - **Listings (`MOCK_LISTINGS`):** 12 items across Formal Wear, Electronics, Books & Notes, Sports Gear, and Bulk Resale with photos, terms, and status (`available`, `borrowed`, `sold`).
 - **Needs (`MOCK_NEEDS`):** 6 reverse requests (Bluetooth Speaker, Lab Coat, TI-84, Marketing Case Study, Table Lamp) with needed-by dates and terms (`borrow-only`, `willing-to-pay`, `either`).
-- **Opportunities (`MOCK_OPPORTUNITIES`):** 15 curated competitions, hackathons, and scholarships (Bain, BCG, Tata Imagination, Swiggy APM, Goldman Sachs, L'Oréal Brandstorm, Reliance Retail, Aditya Birla).
-- **Community Posts (`MOCK_COMMUNITY_POSTS`):** 8 multi-category posts with live reaction counts and interested batchmate lists.
+- **Opportunities (`MOCK_OPPORTUNITIES`):** 15 curated competitions, hackathons, and scholarships across all disciplines.
+- **Community Posts (`MOCK_COMMUNITY_POSTS`):** 8 multi-category posts with live reaction counts and interested student lists.
 - **Chat Scripts (`MOCK_CHAT_SCRIPTS`):** Pre-scripted contextual message exchanges for items, needs, and peer connections.
 
 ---
@@ -650,4 +653,4 @@ Then visit `http://localhost:8000` in your web browser.
 
 ---
 
-*Built with ❤️ for Innovation Sandbox · Great Lakes Institute of Management (GLIM Chennai)*
+*Peerly v2 — The Multi-Campus Operating System for Higher Education Institutions*

@@ -54,7 +54,7 @@ const OnboardingView = {
         return `
           <div style="text-align: center; margin-bottom: 24px;">
             <h2 style="font-size: 24px; margin-bottom: 8px;">Select Your Campus</h2>
-            <p style="font-size: 14px;">Peerly is a trusted closed campus network restricted to verified residential B-school students.</p>
+            <p style="font-size: 14px;">Peerly is a trusted closed campus network restricted to verified students at enrolled colleges and universities.</p>
           </div>
 
           <div style="margin-bottom: 24px;">

@@ -1,11 +1,13 @@
 // js/mockData.js - Pre-seeded Mock Data for Peerly v2 Campus Operating System
 
 const MOCK_CAMPUSES = [
-  { id: "glim-chennai", name: "Great Lakes Institute of Management (GLIM Chennai)", domain: "greatlakes.edu.in", studentsCount: "1,200+ Active" },
+  { id: "glim-chennai", name: "Great Lakes Institute of Management (GLIM)", domain: "greatlakes.edu.in", studentsCount: "1,400+ Active" },
+  { id: "iit-madras", name: "IIT Madras (IITM)", domain: "iitm.ac.in", studentsCount: "4,500+ Active" },
+  { id: "bits-pilani", name: "BITS Pilani (Pilani / Goa / Hyd)", domain: "bits-pilani.ac.in", studentsCount: "3,800+ Active" },
+  { id: "ashoka-univ", name: "Ashoka University (Sonipat)", domain: "ashoka.edu.in", studentsCount: "2,200+ Active" },
+  { id: "nid-ahmedabad", name: "National Institute of Design (NID)", domain: "nid.edu", studentsCount: "950+ Active" },
   { id: "iim-bangalore", name: "IIM Bangalore (IIMB)", domain: "iimb.ac.in", studentsCount: "1,800+ Active" },
-  { id: "isb-hyderabad", name: "Indian School of Business (ISB Hyderabad)", domain: "isb.edu", studentsCount: "950+ Active" },
-  { id: "xlri-jamshedpur", name: "XLRI — Xavier School of Management (Jamshedpur)", domain: "xlri.ac.in", studentsCount: "1,100+ Active" },
-  { id: "spjimr-mumbai", name: "SPJIMR (Mumbai)", domain: "spjimr.org", studentsCount: "850+ Active" }
+  { id: "nlsiu-bangalore", name: "National Law School of India University (NLSIU)", domain: "nls.ac.in", studentsCount: "1,100+ Active" }
 ];
 
 const MOCK_CATEGORIES = [
@@ -23,9 +25,9 @@ const MOCK_USERS = [
   {
     id: "u_me",
     name: "Haripriya M.",
-    batch: "PGP 2026",
-    role: "1st Year PGPM (Marketing & Strategy)",
-    campus: "Great Lakes Institute of Management (GLIM Chennai)",
+    batch: "Cohort 2026",
+    role: "Senior Student (Strategy & Marketing)",
+    campus: "Great Lakes Institute of Management (GLIM)",
     email: "haripriya.m@greatlakes.edu.in",
     avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
     verified: true,
@@ -40,14 +42,14 @@ const MOCK_USERS = [
   {
     id: "u_jean",
     name: "Jean R.",
-    batch: "PGP 2026",
-    role: "2nd Year PGPM (Finance)",
-    campus: "Great Lakes Institute of Management (GLIM Chennai)",
+    batch: "Cohort 2026",
+    role: "Department of Economics & Finance",
+    campus: "Great Lakes Institute of Management (GLIM)",
     email: "jean.r@greatlakes.edu.in",
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
     verified: true,
     isVerifiedSeller: false,
-    bio: "Ex-KPMG audit analyst. Have plenty of idle gear from Term 1 & 2. Ping me anytime for calculators or valuation tips!",
+    bio: "Ex-audit analyst. Have plenty of idle gear from Term 1 & 2. Ping me anytime for calculators or valuation tips!",
     background: ["Finance", "Accounting"],
     skills: ["Excel modeling", "Valuation basics", "DCF Analysis", "Corporate Tax"],
     interests: ["Consulting", "Venture Capital", "Fintech"],
@@ -57,9 +59,9 @@ const MOCK_USERS = [
   {
     id: "u_meera",
     name: "Meera K.",
-    batch: "PGP 2026",
-    role: "PGPM (Finance Club Lead)",
-    campus: "Great Lakes Institute of Management (GLIM Chennai)",
+    batch: "Cohort 2026",
+    role: "Finance & Investment Society Lead",
+    campus: "Great Lakes Institute of Management (GLIM)",
     email: "meera.k@greatlakes.edu.in",
     avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80",
     verified: true,
@@ -74,14 +76,14 @@ const MOCK_USERS = [
   {
     id: "u_thiru",
     name: "Thirupathi M.",
-    batch: "PGP 2026",
-    role: "2nd Year PGPM (Operations)",
-    campus: "Great Lakes Institute of Management (GLIM Chennai)",
+    batch: "Cohort 2026",
+    role: "Operations & Supply Chain Lead",
+    campus: "Great Lakes Institute of Management (GLIM)",
     email: "thirupathi.m@greatlakes.edu.in",
     avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
     verified: true,
     isVerifiedSeller: true,
-    bio: "Bulk campus distributor. Bringing quality wholesale study essentials and room gear directly to hostel blocks.",
+    bio: "Bulk campus distributor. Bringing quality wholesale study essentials and room gear directly to hostel & dorm blocks.",
     background: ["Operations", "Supply Chain"],
     skills: ["Six Sigma", "Logistics Optimization", "Vendor Sourcing", "Negotiation"],
     interests: ["E-Commerce", "Retail Tech", "Operations"],
@@ -91,14 +93,14 @@ const MOCK_USERS = [
   {
     id: "u_rohan",
     name: "Rohan K.",
-    batch: "PGP 2026",
-    role: "PGPM Cohort 2026 (Consulting Club)",
-    campus: "Great Lakes Institute of Management (GLIM Chennai)",
+    batch: "Cohort 2026",
+    role: "Strategy & Consulting Club Convener",
+    campus: "Great Lakes Institute of Management (GLIM)",
     email: "rohan.k@greatlakes.edu.in",
     avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80",
     verified: true,
     isVerifiedSeller: true,
-    bio: "Hostel 3, Room 314. Ex-Bain associate. Feel free to borrow blazers for SIP interviews or mock case rounds.",
+    bio: "Hostel 3, Room 314. Ex-consulting associate. Feel free to borrow blazers for interviews or mock case rounds.",
     background: ["Consulting", "Strategy"],
     skills: ["Guesstimates", "Market Sizing", "MECE Structuring", "Resume Teardown"],
     interests: ["Product Management", "Venture Capital", "Operations"],
@@ -108,9 +110,9 @@ const MOCK_USERS = [
   {
     id: "u_priya",
     name: "Priya S.",
-    batch: "PGP 2026",
-    role: "PGPM Marketing Specialist",
-    campus: "Great Lakes Institute of Management (GLIM Chennai)",
+    batch: "Cohort 2026",
+    role: "Design & Digital Media Lead",
+    campus: "Great Lakes Institute of Management (GLIM)",
     email: "priya.s@greatlakes.edu.in",
     avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
     verified: true,
@@ -125,9 +127,9 @@ const MOCK_USERS = [
   {
     id: "u_vikram",
     name: "Vikram A.",
-    batch: "PGP 2027",
-    role: "PGPM Sports Committee Lead",
-    campus: "Great Lakes Institute of Management (GLIM Chennai)",
+    batch: "Cohort 2027",
+    role: "Campus Sports Council Lead",
+    campus: "Great Lakes Institute of Management (GLIM)",
     email: "vikram.a@greatlakes.edu.in",
     avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80",
     verified: true,
@@ -255,7 +257,7 @@ const MOCK_LISTINGS = [
     ownerId: "u_priya",
     location: "Hostel 1, Room 112",
     photoUrl: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&auto=format&fit=crop&q=80",
-    description: "Standard MBA core marketing textbook in clean condition. No torn pages, minimal pencil markings in margin cases. Retails for ₹1,200+ on Amazon.",
+    description: "Standard core marketing textbook in clean condition. No torn pages, minimal pencil markings in margin cases. Retails for ₹1,200+ on Amazon.",
     terms: "Direct campus sale. UPI on pickup at Hostel 1 lobby.",
     condition: "Very Good",
     createdAt: "1 day ago",
@@ -529,7 +531,7 @@ const MOCK_NEEDS = [
     budget: "₹500 / day",
     seekerId: "u_priya",
     location: "Campus Media Room",
-    description: "Documenting our flagship annual management conclave. Seeking a reliable mirrorless camera or stabilizer gimbal.",
+    description: "Documenting our flagship annual campus fest & conclave. Seeking a reliable mirrorless camera or stabilizer gimbal.",
     status: "open",
     createdAt: "5 days ago"
   }
@@ -578,7 +580,7 @@ const MOCK_COMMUNITY_POSTS = [
     type: "announcement",
     title: "Just launched 'The Hostel Desk' Podcast Ep. 1 🎙️",
     authorId: "u_priya",
-    description: "Episode 1 is live on Spotify! Featuring alumni from BCG & Unilever sharing real unvarnished truths about summer placements, campus survival, and navigating MBA burn-out. Drop by and let us know what you think!",
+    description: "Episode 1 is live on Spotify! Featuring alumni from BCG & Unilever sharing real unvarnished truths about internships, campus survival, and career transitions. Drop by and let us know what you think!",
     tags: ["Podcast", "Alumni", "Campus Initiative"],
     deadline: null,
     interested: [],
@@ -646,7 +648,7 @@ const MOCK_OPPORTUNITIES = [
     source: "Unstop",
     organizer: "Flipkart & Swiggy",
     prizePool: "₹5,00,000 + PPI for APM Roles",
-    eligibility: "1st & 2nd Year MBA / PGP Students",
+    eligibility: "Open to Undergraduate & Post-Graduate Students (All Disciplines)",
     description: "Solve a real-world user retention problem for quick-commerce apps. Submit a 5-slide PRD deck covering user personas, wireframes, and business impact.",
     linkUrl: "https://unstop.com"
   },
@@ -659,7 +661,7 @@ const MOCK_OPPORTUNITIES = [
     source: "Tata Group",
     organizer: "Tata Sons",
     prizePool: "₹2,50,000 + National Trophy",
-    eligibility: "Full-time Post-Graduate Students",
+    eligibility: "Full-time College & University Students",
     description: "India's highest-profile business quiz covering corporate history, brand wars, and disruptive market innovations.",
     linkUrl: "https://tatacrucible.com"
   },
@@ -672,7 +674,7 @@ const MOCK_OPPORTUNITIES = [
     source: "BCG Campus",
     organizer: "Boston Consulting Group",
     prizePool: "Direct Final Interview Shortlists",
-    eligibility: "Batch of 2026 (PGPM / PGP)",
+    eligibility: "Pre-Final & Final Year Students (All Streams)",
     description: "A comprehensive ESG decarbonization case for a legacy steel manufacturer. Form teams of 3–4 with balanced analytical and strategic thinking.",
     linkUrl: "https://bcg.com/careers"
   },
@@ -685,7 +687,7 @@ const MOCK_OPPORTUNITIES = [
     source: "Campus Notice Board",
     organizer: "Aditya Birla Centre",
     prizePool: "₹1,75,000 Annual Tuition Grant",
-    eligibility: "Top 25% Academic Rank in Term 1",
+    eligibility: "Top 25% Academic Standing in Enrolled College",
     description: "Recognizes emerging leaders with outstanding academic distinction, campus governance contributions, and ethical vision.",
     linkUrl: "https://adityabirlascholars.net"
   },
@@ -698,7 +700,7 @@ const MOCK_OPPORTUNITIES = [
     source: "Unstop",
     organizer: "Bain & Co.",
     prizePool: "₹3,00,000 + Mentorship with Partners",
-    eligibility: "Pre-Final Year Management Students",
+    eligibility: "Undergraduate & Graduate Students (All Streams)",
     description: "High-impact private equity due diligence case on an omnichannel healthcare rollup. Evaluate revenue synergies and EBITDA multiples.",
     linkUrl: "https://bain.com"
   },
@@ -711,7 +713,7 @@ const MOCK_OPPORTUNITIES = [
     source: "Unstop",
     organizer: "Amazon India",
     prizePool: "₹3,50,000 + Leadership PPIs",
-    eligibility: "Open to 1st and 2nd Year MBA",
+    eligibility: "Open to All Enrolled College Students",
     description: "Optimize last-mile hub dispatch algorithms and electric vehicle fleet routing for tier-2 Indian logistics networks.",
     linkUrl: "https://amazon.jobs"
   },
@@ -724,7 +726,7 @@ const MOCK_OPPORTUNITIES = [
     source: "LinkedIn Jobs",
     organizer: "Goldman Sachs India",
     prizePool: "Summer Analyst Stipend: ₹1,50,000/mo",
-    eligibility: "Finance Majors & CFA Candidates",
+    eligibility: "Students with Finance, Economics, or Quantitative background",
     description: "Build financial models, track Asian equity markets, and draft initiation reports for renewable energy conglomerates.",
     linkUrl: "https://goldmansachs.com"
   },
@@ -737,7 +739,7 @@ const MOCK_OPPORTUNITIES = [
     source: "LinkedIn Jobs",
     organizer: "Google India",
     prizePool: "Competitive Stipend + PPO Opportunity",
-    eligibility: "MBA graduating in 2026 / 2027",
+    eligibility: "Students graduating in 2026 / 2027 (Tech, Design, or Business)",
     description: "Drive product strategy for Gemini and Google Workspace. Lead user research, write technical specs, and partner with UX & ML engineers.",
     linkUrl: "https://careers.google.com"
   },
@@ -750,7 +752,7 @@ const MOCK_OPPORTUNITIES = [
     source: "Unstop",
     organizer: "L'Oréal Global",
     prizePool: "3-Month Intrapreneurship Mission in Paris",
-    eligibility: "Teams of 3 students under 30",
+    eligibility: "Teams of 3 students under 30 (Any stream)",
     description: "Reinvent the future of beauty tech through AI diagnostics, sustainable packaging, and hyper-personalized consumer journeys.",
     linkUrl: "https://brandstorm.loreal.com"
   },
@@ -763,7 +765,7 @@ const MOCK_OPPORTUNITIES = [
     source: "Campus Notice Board",
     organizer: "Hindustan Unilever",
     prizePool: "₹10,00,000 + Global Finalist Seats",
-    eligibility: "Select Premier B-Schools (GLIM, IIMs, XLRI)",
+    eligibility: "Open to Students across Partner Universities & Institutes",
     description: "India's premier marketing case challenge. Tackle real FMCG market expansion dilemmas and present to the HUL Management Committee.",
     linkUrl: "https://hul.co.in"
   },
@@ -776,7 +778,7 @@ const MOCK_OPPORTUNITIES = [
     source: "Unstop",
     organizer: "McKinsey & Company",
     prizePool: "Fast-track interview invitations",
-    eligibility: "Operations & Tech-focused MBAs",
+    eligibility: "Engineering, Tech & Operations-focused Students",
     description: "Digital manufacturing transformation case focusing on predictive maintenance and Industry 4.0 IoT deployment in automotive plants.",
     linkUrl: "https://mckinsey.com"
   },
@@ -789,7 +791,7 @@ const MOCK_OPPORTUNITIES = [
     source: "LinkedIn",
     organizer: "Peak XV Partners (Sequoia India)",
     prizePool: "$25,000 Non-Dilutive Grant + Mentorship",
-    eligibility: "Student Founders building scalable tech",
+    eligibility: "Student Founders building scalable tech (All Disciplines)",
     description: "Early-stage support for campus founders building SaaS, Consumer Tech, and AI agents. Direct access to Peak XV partners and founder network.",
     linkUrl: "https://peakxv.com"
   },
@@ -802,7 +804,7 @@ const MOCK_OPPORTUNITIES = [
     source: "Unstop",
     organizer: "FinShiksha",
     prizePool: "₹1,00,000 + Portfolio Review",
-    eligibility: "All MBA students",
+    eligibility: "Open to All College & University Students",
     description: "Build an institutional-grade DCF & Relative valuation model for a listed Indian EV battery manufacturer. Submit model sheet and 10-page report.",
     linkUrl: "https://finshiksha.com"
   },
@@ -815,7 +817,7 @@ const MOCK_OPPORTUNITIES = [
     source: "Unstop",
     organizer: "Kearney India",
     prizePool: "₹2,00,000 + Associate PPIs",
-    eligibility: "Teams of 3 management students",
+    eligibility: "Teams of 3 students (Any stream)",
     description: "Design a comprehensive omnichannel banking transformation strategy for a leading public sector bank in Southeast Asia.",
     linkUrl: "https://kearney.com"
   },
@@ -828,7 +830,7 @@ const MOCK_OPPORTUNITIES = [
     source: "LinkedIn Jobs",
     organizer: "CRED India",
     prizePool: "Stipend: ₹1,20,000/mo + Housing",
-    eligibility: "Product & Design thinkers",
+    eligibility: "Product & Design thinkers across all disciplines",
     description: "Work directly with Kunal Shah and CRED product designers to craft high-trust consumer experiences in neo-banking and commerce.",
     linkUrl: "https://cred.club"
   }
@@ -871,7 +873,7 @@ const PRESET_PHOTO_OPTIONS = [
 const MOCK_CHAT_SCRIPTS = {
   l1: [
     { sender: "u_rohan", time: "10:14 AM", text: "Hey Haripriya! Saw your borrow request for the Navy Blazer 👋" },
-    { sender: "me", time: "10:15 AM", text: "Hi Rohan! Yes, I have a consulting case presentation tomorrow morning at 9 AM. Is it available for pickup today?" },
+    { sender: "me", time: "10:15 AM", text: "Hi Rohan! Yes, I have a case presentation tomorrow morning at 9 AM. Is it available for pickup today?" },
     { sender: "u_rohan", time: "10:17 AM", text: "Absolutely! It's dry-cleaned and hanging in my room (Hostel 3, Room 314). I'm around until 8:00 PM." },
     { sender: "me", time: "10:19 AM", text: "Awesome! I'll drop by at 5:30 PM right after the Marketing lecture." },
     { sender: "u_rohan", time: "10:20 AM", text: "Sounds perfect! See you at 5:30 at Hostel 3 lobby 🙌" }
@@ -884,7 +886,7 @@ const MOCK_CHAT_SCRIPTS = {
     { sender: "u_jean", time: "02:36 PM", text: "Sure, let's meet at the canteen entrance table at 6 PM! 👍" }
   ],
   l4: [
-    { sender: "u_priya", time: "11:05 AM", text: "Hey! Glad you want the Kotler Marketing textbook 📚" },
+    { sender: "u_priya", time: "11:05 AM", text: "Hey! Glad you want the Marketing textbook 📚" },
     { sender: "me", time: "11:06 AM", text: "Hi Priya! Is ₹450 fine via GPay when we meet?" },
     { sender: "u_priya", time: "11:07 AM", text: "Yes, GPay is totally fine! Are you free around 4 PM near the Library foyer?" },
     { sender: "me", time: "11:08 AM", text: "Yes, perfect! See you at 4 PM in the library foyer." }
@@ -902,7 +904,7 @@ const MOCK_CHAT_SCRIPTS = {
     { sender: "u_vikram", time: "04:20 PM", text: "Lifesaver! I will pick it up at 3 PM and return it Sunday morning spotless 🙌" }
   ],
   u_meera: [
-    { sender: "me", time: "11:20 AM", text: "Hi Meera! Saw your profile on Connect — I'm looking to brush up on DCF modeling before SIP season 👋" },
+    { sender: "me", time: "11:20 AM", text: "Hi Meera! Saw your profile on Connect — I'm looking to brush up on DCF modeling before placement season 👋" },
     { sender: "u_meera", time: "11:22 AM", text: "Hey Haripriya! Happy to help! We could grab coffee at the Amphitheatre cafe and walk through a clean 3-statement model template." },
     { sender: "me", time: "11:25 AM", text: "That would be incredible! Are you free tomorrow after 5 PM?" },
     { sender: "u_meera", time: "11:27 AM", text: "Yes, 5:30 PM works great. Bring your laptop with Excel! ☕" }
@@ -928,19 +930,19 @@ const MOCK_ROADMAP_ITEMS = [
     items: [
       "Scheduled Opportunities Ingestion: Automated daily scraper/API connectors (Unstop, Internshala, LinkedIn, Noticeboards)",
       "Production Peer Pairing Engine: Bi-weekly cohort matching algorithm with calendar invites",
-      "Hostel Room Drop & Smart Locker Integration across residential campus wings",
+      "Hostel & Dorm Drop / Smart Locker Integration across residential campus wings",
       "Automated UPI Escrow & Security Deposit holds for high-value gear",
       "Batch WhatsApp / Telegram Bot notification bridges for instant handoff pings"
     ]
   },
   {
-    phase: "Phase 3 (Inter-B-School Network)",
+    phase: "Phase 3 (Inter-Campus University Network)",
     status: "Future Vision",
     items: [
-      "Multi-Campus Inter-B-School Network (IIMs, ISB, XLRI, GLIM) for national case comp team formation",
+      "Multi-Campus Inter-University Network across engineering, design, arts, and business institutions",
       "Integrated Skill Exchange Credit economy (earn hours by teaching, spend on borrowing)",
       "Alumni Knowledge & Mentorship Portal with verified corporate alumni badges",
-      "Student Entrepreneur Storefronts for custom campus merchandise & merchandise presales"
+      "Student Entrepreneur Storefronts for custom campus merchandise & club presales"
     ]
   }
 ];

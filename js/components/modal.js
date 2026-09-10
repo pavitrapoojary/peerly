@@ -746,7 +746,7 @@ const Modal = {
   openCampusSelectModal() {
     const content = `
       <div style="display: flex; flex-direction: column; gap: 10px;">
-        <p style="font-size: 13.5px; margin-bottom: 10px;">Select your residential B-school campus:</p>
+        <p style="font-size: 13.5px; margin-bottom: 10px;">Select your college, institute, or university campus:</p>
         ${MOCK_CAMPUSES.map(c => `
           <div class="card card-hover campus-choice-card" data-campus-id="${c.id}" style="padding: 14px; cursor: pointer; border-color: ${c.id === appState.selectedCampus.id ? 'var(--color-primary)' : 'var(--color-border)'}; background: ${c.id === appState.selectedCampus.id ? 'var(--color-primary-light)' : '#FFFFFF'};">
             <div style="display: flex; align-items: center; justify-content: space-between;">

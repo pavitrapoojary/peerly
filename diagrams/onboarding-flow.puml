@@ -9,19 +9,19 @@ skinparam defaultFontName "Plus Jakarta Sans"
 
 title Peerly v2 — 5-Step Enriched Campus Onboarding & Verification Flow
 
-actor "MBA Student" as Student
+actor "College / University Student" as Student
 participant "UI Router\n(#/onboarding)" as UI
 participant "Verification Engine\n(Simulated)" as Verify
 participant "State Store\n(appState)" as State
 
 == Step 1: Campus Selection ==
 Student -> UI : Opens App / Taps "Get Started"
-UI -> Student : Displays searchable list of residential B-schools\n(GLIM Chennai pre-highlighted, IIMB, ISB, XLRI, SPJIMR)
-Student -> UI : Selects "GLIM Chennai"
-UI -> State : Updates selected campus & domain context (@greatlakes.edu.in)
+UI -> Student : Displays searchable list of colleges & universities\n(GLIM, IIT Madras, BITS Pilani, Ashoka, NID, IIMB, NLSIU)
+Student -> UI : Selects campus (e.g., "GLIM")
+UI -> State : Updates selected campus & institutional domain (@greatlakes.edu.in)
 
 == Step 2: Campus .edu Email Verification ==
-UI -> Student : Prompts for institutional email (@greatlakes.edu.in)
+UI -> Student : Prompts for institutional email (@greatlakes.edu.in / .edu / .ac.in)
 Student -> UI : Enters email & taps "Send OTP"
 UI -> Verify : Sends 4-digit simulated OTP (Code: 4829)
 Verify --> UI : OTP Dispatched with simulated toast
@@ -32,14 +32,14 @@ Verify --> UI : Email Verified Successfully
 UI -> State : Sets user.verified = true
 
 == Step 3: Background & Radar Interests Profile Setup ==
-UI -> Student : Prompts Cohort Year (PGP 2026/2027),\nSpecialization tags (Marketing, Finance, Consulting),\nSkills offered (Excel modeling, GTM),\n& Radar Target Interests (Finance, PM, Analytics)
+UI -> Student : Prompts Cohort Year (2026/2027),\nSpecialization tags (Engineering, Strategy, Design, Analytics, Finance),\nSkills offered (Python, UI/UX, Excel modeling, GTM),\n& Radar Target Interests (AI, Product, Consulting, Research)
 Student -> UI : Selects tags & customizes profile
 UI -> State : Stores user.batch, user.background, user.skills, user.interests
 
 == Step 4: Student ID Upload (Optional) ==
-UI -> Student : Prompts optional Campus ID card upload\n(Unlocks "Verified Seller" badge & bulk resale)
+UI -> Student : Prompts optional Student ID card upload\n(Unlocks "Verified Seller" badge & bulk exchange)
 alt Student Uploads ID Card
-    Student -> UI : Uploads/clicks ID photo (glim_id.png)
+    Student -> UI : Uploads/clicks ID photo (student_id.png)
     UI -> State : Sets user.isVerifiedSeller = true
 else Student Skips
     Student -> UI : Taps "Skip for now"
@@ -47,7 +47,7 @@ else Student Skips
 end
 
 == Step 5: You're In! (Personalized Access Granted) ==
-UI -> Student : Displays celebration modal with "Verified at GLIM Chennai" badge\n+ Preview of tailored opportunities & peer matches
+UI -> Student : Displays celebration modal with "Verified Campus Student" badge\n+ Preview of tailored opportunities & peer matches
 Student -> UI : Taps "Explore Campus Feed"
 UI -> State : Calls completeOnboarding()
 UI --> Student : Redirects to Home Feed (#/feed) with full 4-pillar privileges

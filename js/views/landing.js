@@ -182,7 +182,7 @@ const LandingView = {
               <div class="step-number">1</div>
               <h3 style="font-size: 17px; margin-bottom: 8px;">Verify Campus Email</h3>
               <p style="font-size: 13.5px; line-height: 1.5;">
-                Gated to verified @greatlakes.edu.in students. Optional campus ID upload unlocks the Verified Seller badge.
+                Gated to verified institutional .edu / campus emails. Optional student ID upload unlocks the Verified Seller badge.
               </p>
             </div>
 

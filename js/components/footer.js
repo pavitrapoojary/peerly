@@ -12,7 +12,7 @@ const Footer = {
                 <span style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: var(--color-text-primary);">Peerly v2</span>
               </div>
               <p style="font-size: 13.5px; max-width: 420px; color: var(--color-text-secondary); line-height: 1.5;">
-                The complete Campus Operating System for residential MBA campuses. Trade what you have, meet who you should know, ask for help, and track high-impact opportunities.
+                The complete Campus Operating System for colleges, universities, and student communities. Trade what you have, meet who you should know, ask for help, and track high-impact opportunities.
               </p>
             </div>
 
@@ -41,7 +41,7 @@ const Footer = {
 
           <div class="footer-bottom">
             <div>
-              Built for <strong>Innovation Sandbox</strong> · Great Lakes Institute of Management (GLIM Chennai)
+              <strong>Peerly v2</strong> · Multi-Campus Operating System for Higher Education Institutions
             </div>
             <div style="font-size: 12px; color: var(--color-text-muted);">
               v2 Campus Operating System · 100% Front-End Prototype · In-Memory State
