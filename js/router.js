@@ -1,10 +1,13 @@
-// js/router.js - Vanilla Hash-Based Client-Side Router for Peerly
+// js/router.js - Vanilla Hash-Based Client-Side Router for Peerly v2
 
 const Router = {
   routes: {
     "#/": LandingView,
     "#/onboarding": OnboardingView,
     "#/feed": FeedView,
+    "#/connect": ConnectView,
+    "#/community": CommunityView,
+    "#/opportunities": OpportunitiesView,
     "#/new-listing": NewListingView,
     "#/profile": ProfileView
   },
@@ -58,28 +61,32 @@ const Router = {
 
     // Do not wipe out active focused inputs during search typing
     const activeElement = document.activeElement;
-    const isTyping = activeElement && (activeElement.id === "feed-search-input" || activeElement.id === "chat-text-input");
+    const isTyping = activeElement && (activeElement.id === "feed-search-input" || activeElement.id === "chat-text-input" || activeElement.id === "seek-need-title" || activeElement.id === "need-title-input");
 
     if (isStateUpdate && isTyping) {
-      // For live search typing, selectively update items grid rather than full page wipe
       if (view === FeedView) {
-        const grid = document.querySelector(".item-grid, .empty-state");
-        if (grid) {
-          const items = appState.getFilteredListings();
-          if (items.length > 0) {
-            const tempDiv = document.createElement("div");
-            tempDiv.className = "item-grid";
-            tempDiv.innerHTML = items.map(item => FeedView.renderItemCard(item)).join("");
-            grid.replaceWith(tempDiv);
-          } else {
-            const tempDiv = document.createElement("div");
-            tempDiv.innerHTML = FeedView.renderEmptyState();
-            grid.replaceWith(tempDiv.firstElementChild);
-            document.getElementById("btn-reset-filters")?.addEventListener("click", () => {
-              appState.setSearchQuery("");
-              appState.setSelectedCategory("all");
-              appState.setSelectedMode("all");
-            });
+        const isNeeds = appState.marketplaceTab === "needs";
+        if (isNeeds) {
+          const grid = document.querySelector(".needs-grid, .empty-state");
+          if (grid) {
+            const needs = appState.getFilteredNeeds();
+            if (needs.length > 0) {
+              const tempDiv = document.createElement("div");
+              tempDiv.className = "needs-grid";
+              tempDiv.innerHTML = needs.map(n => FeedView.renderNeedCard(n)).join("");
+              grid.replaceWith(tempDiv);
+            }
+          }
+        } else {
+          const grid = document.querySelector(".item-grid, .empty-state");
+          if (grid) {
+            const items = appState.getFilteredListings();
+            if (items.length > 0) {
+              const tempDiv = document.createElement("div");
+              tempDiv.className = "item-grid";
+              tempDiv.innerHTML = items.map(item => FeedView.renderItemCard(item)).join("");
+              grid.replaceWith(tempDiv);
+            }
           }
         }
         return;

@@ -1,0 +1,75 @@
+@startuml SystemArchitecture
+!theme plain
+skinparam backgroundColor #FAFAF8
+skinparam roundcorner 12
+skinparam sequenceArrowThickness 2
+skinparam defaultFontName "Plus Jakarta Sans"
+
+title Peerly v2 — System Architecture & Component Interactions
+
+package "Presentation Layer (HTML5 & Vanilla CSS3)" {
+  component [index.html / App Shell] as Shell
+  component [styles.css / Design Tokens & Glassmorphism] as Styles
+  component [Persistent 4-Pillar Navbar] as Nav
+  component [Universal Modal & Scripted Chat Drawer] as Modals
+  component [Toast Notification System] as Toasts
+}
+
+package "Routing & View Layer (ES6 JavaScript)" {
+  component [Hash Router (#/)] as Router
+  
+  folder "4 Core Product Pillars" {
+    component [Pillar 1: Things\nMarketplace & Needs Views\n(feed.js, itemDetail.js, newListing.js)] as VThings
+    component [Pillar 2: Skills\nConnect Hub & Coffee Roulette\n(connect.js)] as VSkills
+    component [Pillar 3: Help\nCommunity Board & Team-Ups\n(community.js)] as VHelp
+    component [Pillar 4: Knowledge\nPersonalized Radar Engine\n(opportunities.js)] as VKnowledge
+  }
+
+  folder "Accountability & Identity Views" {
+    component [5-Step Onboarding Wizard\n(onboarding.js)] as VOnboarding
+    component [User Profile & Borrows Tracker\n(profile.js)] as VProfile
+    component [Landing Hero & Benefit Strip\n(landing.js)] as VLanding
+  }
+}
+
+package "State & Engine Layer (Client-Side In-Memory)" {
+  component [AppState Singleton\n(state.js)] as StateStore
+  component [Opportunities Tag Matcher & Urgency Classifier] as MatchEngine
+  component [Duplicate Need Detection Nudge Engine] as NudgeEngine
+  component [Peer Pairing Bipartite Suggester] as PairingEngine
+  component [Trust Score & Closed-Loop Engine] as TrustEngine
+}
+
+package "Data Layer (Pre-seeded Mock Models)" {
+  database [mockData.js\n12+ Listings, 6+ Needs, 15+ Opportunities,\n10+ Community Posts, 5 Campuses, 6 Users] as MockDB
+}
+
+' Relationships
+Shell --> Router : DOM Hash Change
+Router --> VLanding
+Router --> VOnboarding
+Router --> VThings
+Router --> VSkills
+Router --> VHelp
+Router --> VKnowledge
+Router --> VProfile
+
+VThings --> StateStore : Read / Create Listing / Respond to Need
+VSkills --> StateStore : Opt-in Pairing / Trigger Connect
+VHelp --> StateStore : Create Team-Up / React / Express Interest
+VKnowledge --> StateStore : Filter by Interests & Deadlines
+
+StateStore --> MatchEngine : Array.filter(tags in currentUser.interests)
+StateStore --> NudgeEngine : Substring / Category Matching
+StateStore --> PairingEngine : Skill vs Learning Interest Map
+StateStore --> TrustEngine : Return Condition & Thumbs Rating
+
+StateStore ..> MockDB : Cloned on Initialize / Reset
+
+VThings ..> Modals : Scripted Chat Drawer
+VSkills ..> Modals : Peer Chat Starter
+VHelp ..> Modals : Post Composer & Team Roster
+VKnowledge ..> Modals : Interest Tag Modifier
+StateStore ..> Toasts : Dispatch Feedback
+
+@enduml

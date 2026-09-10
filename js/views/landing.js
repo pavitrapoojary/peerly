@@ -1,154 +1,180 @@
-// js/views/landing.js - Landing Page (Pitch Deck as a Webpage)
+// js/views/landing.js - Radically Simplified v2 Landing Page (§2)
 
 const LandingView = {
   render() {
     return `
-      <!-- Hero Section -->
+      <!-- Hero Section (§2.2.1) -->
       <section class="landing-hero">
         <div class="hero-pill">
-          ${Icons.sparkles(14, '#5B4FE0')} Residential MBA Campus Marketplace
+          ${Icons.sparkles(14, '#5B4FE0')} The Campus Operating System
         </div>
 
         <h1 class="hero-title">
-          The items and skills you need are already <span class="gradient-text">two floors away</span>.
+          Everything campus. <span class="gradient-text">One app.</span>
         </h1>
 
         <p class="hero-subtitle">
-          Peerly turns your MBA hostel into a searchable, trusted marketplace — borrow formal wear for interviews, grab calculators for exam week, trade notes, or book peer case coaching without WhatsApp clutter.
+          Buy, sell, or borrow from batchmates. Meet people worth knowing. Find teammates. Never miss a deadline that matters to you.
         </p>
 
         <div class="hero-cta-group">
-          <a href="#/onboarding" class="btn btn-primary btn-lg">
-            ${Icons.sparkles(18)} Get Started (Test Onboarding)
+          <a href="#/feed" class="btn btn-primary btn-lg">
+            ${Icons.sparkles(18)} Get Started (Explore Campus)
           </a>
-          <a href="#/feed" class="btn btn-secondary btn-lg">
-            ${Icons.search(18)} Explore Live Campus Feed
+          <a href="#/onboarding" class="btn btn-secondary btn-lg">
+            ${Icons.shieldCheck(18)} Test Onboarding Flow
           </a>
         </div>
 
-        <div class="hero-stats-row">
-          <div class="stat-item">
-            <div class="stat-number">1,200+</div>
-            <div class="stat-label">Verified Students</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">&lt;60s</div>
-            <div class="stat-label">Rapid Listing Flow</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">100%</div>
-            <div class="stat-label">Accountability & Returns</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">0</div>
-            <div class="stat-label">WhatsApp Spam</div>
-          </div>
+        <!-- 4-Pillar Visual Elevator Pitch Strip (§2.2.1) -->
+        <div class="hero-pillars-row">
+          <a href="#/feed" class="hero-pillar-badge" title="Marketplace">
+            <span class="hero-pillar-icon" style="color: var(--color-secondary);">${Icons.tag(16)}</span>
+            <span class="hero-pillar-name"><strong>Marketplace</strong> · Borrow / Buy / Give</span>
+          </a>
+          <a href="#/connect" class="hero-pillar-badge" title="Connect">
+            <span class="hero-pillar-icon" style="color: var(--color-accent-blue);">${Icons.users(16)}</span>
+            <span class="hero-pillar-name"><strong>Connect</strong> · Meet Batchmates & Swap Skills</span>
+          </a>
+          <a href="#/community" class="hero-pillar-badge" title="Community Board">
+            <span class="hero-pillar-icon" style="color: var(--color-accent-amber);">${Icons.messageCircle(16)}</span>
+            <span class="hero-pillar-name"><strong>Community</strong> · Team-Ups & Asks</span>
+          </a>
+          <a href="#/opportunities" class="hero-pillar-badge" title="Opportunities Radar">
+            <span class="hero-pillar-icon" style="color: var(--color-primary);">${Icons.compass(16)}</span>
+            <span class="hero-pillar-name"><strong>Opportunities</strong> · Curated Radar</span>
+          </a>
         </div>
       </section>
 
-      <div class="main-container" style="padding-top: 10px;">
-        <!-- Problem Statement Section -->
+      <div class="main-container" style="padding-top: 20px;">
+        <!-- "A Day in Peerly" 4-Beat Story Strip (§2.2.2) -->
         <section style="margin-bottom: 70px;">
           <div class="section-header">
-            <div class="section-tag">The Problem</div>
-            <h2 class="section-title">The problem isn't scarcity. It's discoverability and trust.</h2>
+            <div class="section-tag">A Day in Peerly</div>
+            <h2 class="section-title">One campus. Four everyday moments.</h2>
             <p class="section-desc">
-              On residential campuses, demand and supply live right beside each other in hostel wings, but existing channels fail to connect them.
-            </p>
-          </div>
-
-          <div class="problem-grid">
-            <div class="problem-card">
-              <div class="problem-icon-wrapper" style="color: var(--color-primary);">
-                ${Icons.flame(24)}
-              </div>
-              <h3>The Need Exists</h3>
-              <p style="font-size: 14.5px; line-height: 1.55;">
-                Urgent requirements for summer placement suits, graphing calculators, case finals, and course notes lead to panicked last-minute purchases on Amazon.
-              </p>
-            </div>
-
-            <div class="problem-card">
-              <div class="problem-icon-wrapper" style="color: var(--color-secondary);">
-                ${Icons.layers(24)}
-              </div>
-              <h3>The Supply Exists</h3>
-              <p style="font-size: 14.5px; line-height: 1.55;">
-                Blazers, financial calculators, textbooks, and domain coaching skills sit idle across senior and batchmate rooms two corridors away.
-              </p>
-            </div>
-
-            <div class="problem-card">
-              <div class="problem-icon-wrapper" style="color: var(--color-accent-pink);">
-                ${Icons.messageSquare(24)}
-              </div>
-              <h3>The Connection is Broken</h3>
-              <p style="font-size: 14.5px; line-height: 1.55;">
-                Broadcast WhatsApp messages get buried in minutes, reach is capped by batch silos, there's zero return accountability, and selling feels spammy.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <!-- Solution Section - 4 Pillars -->
-        <section style="margin-bottom: 70px;">
-          <div class="section-header">
-            <div class="section-tag">Our Solution</div>
-            <h2 class="section-title">Four campus exchange pillars in one trusted hub.</h2>
-            <p class="section-desc">
-              Designed explicitly around pull-based discovery, lightweight verification, and built-in return accountability.
+              How Peerly replaces four chaotic WhatsApp groups and three fragmented apps with one trusted routine.
             </p>
           </div>
 
           <div class="solution-grid">
-            <div class="pillar-card">
-              <div class="pillar-icon-box" style="background: var(--color-primary-light); color: var(--color-primary);">
-                ${Icons.briefcase(26)}
-              </div>
-              <h3 style="font-size: 18px; margin-bottom: 8px;">Things (Borrow)</h3>
-              <p style="font-size: 13.5px; color: var(--color-text-secondary); line-height: 1.5;">
-                Blazers, calculators, sports gear, and electronics lent with clear return-by dates and condition checks.
-              </p>
-            </div>
-
-            <div class="pillar-card">
-              <div class="pillar-icon-box" style="background: var(--color-accent-pink-light); color: var(--color-accent-pink);">
-                ${Icons.tag(26)}
-              </div>
-              <h3 style="font-size: 18px; margin-bottom: 8px;">Commerce (Buy & Sell)</h3>
-              <p style="font-size: 13.5px; color: var(--color-text-secondary); line-height: 1.5;">
-                Textbooks, stationery, and verified bulk essentials sold in a transparent, opt-in marketplace.
-              </p>
-            </div>
-
-            <div class="pillar-card">
+            <div class="pillar-card day-beat-card" onclick="Router.navigate('#/feed')">
               <div class="pillar-icon-box" style="background: var(--color-secondary-light); color: var(--color-secondary);">
-                ${Icons.bookOpen(26)}
+                ${Icons.briefcase(24)}
               </div>
-              <h3 style="font-size: 18px; margin-bottom: 8px;">Knowledge (Give Away)</h3>
+              <div class="day-beat-pillar">Things · Marketplace</div>
+              <h3 style="font-size: 17px; margin-bottom: 8px;">"Need a blazer for tomorrow?"</h3>
               <p style="font-size: 13.5px; color: var(--color-text-secondary); line-height: 1.5;">
-                Term 1 cheat sheets, formula binders, and lecture notes passed down freely to juniors.
+                Someone two floors up has three in your exact size. Request it in 10 seconds with automatic return accountability.
               </p>
+              <div class="day-beat-action">Browse Marketplace →</div>
             </div>
 
-            <div class="pillar-card">
-              <div class="pillar-icon-box" style="background: var(--color-accent-amber-light); color: var(--color-accent-amber);">
-                ${Icons.lightbulb(26)}
+            <div class="pillar-card day-beat-card" onclick="Router.navigate('#/connect')">
+              <div class="pillar-icon-box" style="background: var(--color-accent-blue-light); color: var(--color-accent-blue);">
+                ${Icons.coffee(24)}
               </div>
-              <h3 style="font-size: 18px; margin-bottom: 8px;">Skills (Peer Coaching)</h3>
+              <div class="day-beat-pillar" style="color: var(--color-accent-blue);">Skills · Connect</div>
+              <h3 style="font-size: 17px; margin-bottom: 8px;">"New to campus?"</h3>
               <p style="font-size: 13.5px; color: var(--color-text-secondary); line-height: 1.5;">
-                Excel financial modeling, case competition teardowns, and consulting resume reviews.
+                Meet 2 people in your batch this week. Our zero-effort Peer Pairing sets up coffee and gives you a mutual icebreaker.
               </p>
+              <div class="day-beat-action" style="color: var(--color-accent-blue);">Explore Connect →</div>
+            </div>
+
+            <div class="pillar-card day-beat-card" onclick="Router.navigate('#/community')">
+              <div class="pillar-icon-box" style="background: var(--color-accent-amber-light); color: var(--color-accent-amber);">
+                ${Icons.handshake(24)}
+              </div>
+              <div class="day-beat-pillar" style="color: var(--color-accent-amber);">Help · Community</div>
+              <h3 style="font-size: 17px; margin-bottom: 8px;">"Short one teammate?"</h3>
+              <p style="font-size: 13.5px; color: var(--color-text-secondary); line-height: 1.5;">
+                Need a finance modeler for this weekend's case comp? Post on the Community Board and get matched before deadlines.
+              </p>
+              <div class="day-beat-action" style="color: var(--color-accent-amber);">Open Community Board →</div>
+            </div>
+
+            <div class="pillar-card day-beat-card" onclick="Router.navigate('#/opportunities')">
+              <div class="pillar-icon-box" style="background: var(--color-primary-light); color: var(--color-primary);">
+                ${Icons.target(24)}
+              </div>
+              <div class="day-beat-pillar" style="color: var(--color-primary);">Knowledge · Opportunities</div>
+              <h3 style="font-size: 17px; margin-bottom: 8px;">"Never miss a deadline"</h3>
+              <p style="font-size: 13.5px; color: var(--color-text-secondary); line-height: 1.5;">
+                A national case competition tailored to your specialization just opened. We surface it on your radar with closing soon alerts.
+              </p>
+              <div class="day-beat-action" style="color: var(--color-primary);">View Radar →</div>
             </div>
           </div>
         </section>
 
-        <!-- How It Works Section -->
+        <!-- "Why not just WhatsApp / Jugarr / OLX" Comparison Table (§2.2.3) -->
+        <section style="margin-bottom: 70px;">
+          <div class="section-header">
+            <div class="section-tag">Why Peerly</div>
+            <h2 class="section-title">Built for campus density, not generic classifieds.</h2>
+            <p class="section-desc">
+              Why adding more categories to a marketplace doesn't solve the core student friction.
+            </p>
+          </div>
+
+          <div class="comparison-table-wrapper">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th style="width: 25%;">Feature / Dimension</th>
+                  <th style="width: 25%;">Generic Apps (OLX / Jugarr)</th>
+                  <th style="width: 25%;">WhatsApp Batch Groups</th>
+                  <th style="width: 25%; background: var(--color-primary-light); color: var(--color-primary);">
+                    ✨ Peerly v2 Campus OS
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Resource Discovery</strong></td>
+                  <td>Only tangible items listed for sale; no reverse seeker requests</td>
+                  <td>Spam-heavy broadcasts, buried in 5 minutes</td>
+                  <td class="highlight-cell">
+                    <strong>Searchable items + "Needs" tab</strong> with inline matching nudges
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Trust & Accountability</strong></td>
+                  <td>Strangers, no hostel room verification or return enforcement</td>
+                  <td>Social awkwardness, zero tracking of lent gear</td>
+                  <td class="highlight-cell">
+                    <strong>Gated .edu verification</strong> + return timers & condition rating loops
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Relationship Graph</strong></td>
+                  <td>Transactional only — buyer disappears after purchase</td>
+                  <td>Siloed into isolated hostel or section groups</td>
+                  <td class="highlight-cell">
+                    <strong>Connect networking</strong> with skill-swap matches & zero-effort Peer Pairing
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Curated Radar</strong></td>
+                  <td>None (must search external job boards)</td>
+                  <td>Occasional unorganized forwarding of links</td>
+                  <td class="highlight-cell">
+                    <strong>Daily-curated Opportunities Radar</strong> personalized to your exact interest tags
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- How It Works Section (§2.2.4) -->
         <section style="margin-bottom: 70px;">
           <div class="section-header">
             <div class="section-tag">How It Works</div>
-            <h2 class="section-title">Frictionless, closed-loop campus discovery.</h2>
-            <p class="section-desc">Designed so finding an item takes seconds, and returning it feels natural.</p>
+            <h2 class="section-title">Zero friction. Verified trust. Closed loop.</h2>
+            <p class="section-desc">Designed so finding what you need takes seconds, and returning it feels natural.</p>
           </div>
 
           <div class="how-it-works-grid">
@@ -162,9 +188,9 @@ const LandingView = {
 
             <div class="step-card">
               <div class="step-number">2</div>
-              <h3 style="font-size: 17px; margin-bottom: 8px;">Post or Browse</h3>
+              <h3 style="font-size: 17px; margin-bottom: 8px;">Browse, Seek, or Connect</h3>
               <p style="font-size: 13.5px; line-height: 1.5;">
-                List idle gear in under 60 seconds. Filter live by Borrow, Buy, or Give Away tags.
+                Borrow idle gear, post a "Need", find hackathon teammates on the Community board, or swap skills on Connect.
               </p>
             </div>
 
@@ -172,101 +198,41 @@ const LandingView = {
               <div class="step-number">3</div>
               <h3 style="font-size: 17px; margin-bottom: 8px;">Coordinate Handoff</h3>
               <p style="font-size: 13.5px; line-height: 1.5;">
-                One-tap request with instant terms, return deadline confirmation, and scripted hostel chat.
+                One-tap request with instant terms, return deadline confirmation, and built-in hostel chat starters.
               </p>
             </div>
 
             <div class="step-card">
               <div class="step-number">4</div>
-              <h3 style="font-size: 17px; margin-bottom: 8px;">Return & Rate</h3>
+              <h3 style="font-size: 17px; margin-bottom: 8px;">Return, Rate & Compound</h3>
               <p style="font-size: 13.5px; line-height: 1.5;">
-                Condition checks and peer thumbs up/down ratings build a transparent trust score on your profile.
+                Condition checks and peer thumbs up/down ratings build a transparent trust score on your campus profile.
               </p>
             </div>
           </div>
         </section>
 
-        <!-- Persona Testimonials -->
-        <section style="margin-bottom: 70px;">
-          <div class="section-header">
-            <div class="section-tag">Built for Campus Personas</div>
-            <h2 class="section-title">Designed for real MBA workflows.</h2>
-            <p class="section-desc">Carried directly from innovation research into our product architecture.</p>
-          </div>
-
-          <div class="persona-grid">
-            <div class="persona-card">
-              <div>
-                <div class="persona-header">
-                  <img src="${MOCK_USERS[1].avatar}" class="persona-avatar" alt="Jean R." />
-                  <div>
-                    <div class="persona-name">Jean R.</div>
-                    <div class="persona-role">Passive Idle Owner · Supply</div>
-                  </div>
-                </div>
-                <div class="persona-quote">
-                  "I listed my TI-84 calculator once and let juniors come to me. The return-by date means I don't have to chase anyone before exams."
-                </div>
-              </div>
-              <span class="badge badge-borrow" style="align-self: flex-start;">${Icons.shieldCheck(14)} Verified Lender</span>
-            </div>
-
-            <div class="persona-card">
-              <div>
-                <div class="persona-header">
-                  <img src="${MOCK_USERS[0].avatar}" class="persona-avatar" alt="Haripriya M." />
-                  <div>
-                    <div class="persona-name">Haripriya M.</div>
-                    <div class="persona-role">Seeker · Short-term Demand</div>
-                  </div>
-                </div>
-                <div class="persona-quote">
-                  "Instead of buying a new blazer for our mock placement round, I found one in my exact size in Hostel 3 in two clicks."
-                </div>
-              </div>
-              <span class="badge badge-borrow" style="align-self: flex-start;">${Icons.check(14)} Active Borrower</span>
-            </div>
-
-            <div class="persona-card">
-              <div>
-                <div class="persona-header">
-                  <img src="${MOCK_USERS[2].avatar}" class="persona-avatar" alt="Thirupathi M." />
-                  <div>
-                    <div class="persona-name">Thirupathi M.</div>
-                    <div class="persona-role">Bulk Reseller · Proactive Commerce</div>
-                  </div>
-                </div>
-                <div class="persona-quote">
-                  "Having an opt-in marketplace with the Verified Seller badge means I don't spam cohort groups with wholesale essentials."
-                </div>
-              </div>
-              <span class="badge badge-verified-seller" style="align-self: flex-start;">${Icons.sparkles(12, '#FFFFFF')} Verified Seller</span>
-            </div>
-          </div>
-        </section>
-
         <!-- Final CTA Banner -->
-        <section class="card" style="background: linear-gradient(135deg, #1E1B2E 0%, #312866 100%); color: #FFFFFF; text-align: center; padding: 48px 24px; border: none; margin-bottom: 40px;">
+        <section class="card" style="background: linear-gradient(135deg, #1E1B2E 0%, #312866 100%); color: #FFFFFF; text-align: center; padding: 48px 24px; border: none; margin-bottom: 40px; border-radius: var(--radius-xl);">
+          <div class="badge badge-borrow" style="margin-bottom: 12px; display: inline-flex;">
+            ${Icons.sparkles(12, '#2DBFA0')} Ready to test the v2 prototype?
+          </div>
           <h2 style="color: #FFFFFF; font-size: clamp(26px, 4vw, 36px); margin-bottom: 14px;">
-            Ready to explore the Peerly campus marketplace?
+            Your campus, fully connected.
           </h2>
-          <p style="color: #D1CFE3; max-width: 600px; margin: 0 auto 28px auto; font-size: 16px;">
-            Experience the live clickable prototype with pre-seeded listings, simulated onboarding, and real-time state updates.
+          <p style="color: #D1CFE3; max-width: 600px; margin: 0 auto 28px auto; font-size: 15.5px;">
+            Experience all four pillars live with pre-seeded campus listings, reverse needs, networking rails, community team-ups, and personalized opportunities radar.
           </p>
           <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
             <a href="#/feed" class="btn btn-primary btn-lg" style="background: var(--color-primary);">
-              ${Icons.search(18)} Open Campus Feed
+              ${Icons.tag(18)} Open Marketplace
             </a>
-            <a href="#/onboarding" class="btn btn-secondary btn-lg" style="background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); color: #FFFFFF;">
-              ${Icons.shieldCheck(18, '#FFFFFF')} Test Onboarding Flow
+            <a href="#/connect" class="btn btn-secondary btn-lg" style="background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); color: #FFFFFF;">
+              ${Icons.users(18, '#FFFFFF')} Explore Connect & Pairing
             </a>
           </div>
         </section>
       </div>
     `;
-  },
-
-  afterRender() {
-    // Any event bindings if necessary
   }
 };

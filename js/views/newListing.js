@@ -1,4 +1,4 @@
-// js/views/newListing.js - Under-60-Seconds Fast Create Listing View
+// js/views/newListing.js - Create Item Listing or Post a Need with Inline Matching Nudge (§3.1)
 
 const NewListingView = {
   render() {
@@ -7,25 +7,37 @@ const NewListingView = {
 
     return `
       <div class="main-container">
-        <div style="max-width: 640px; margin: 0 auto;">
+        <div style="max-width: 680px; margin: 0 auto;">
           <!-- Back Link -->
           <div class="btn-back" onclick="Router.navigate('#/feed')">
-            ${Icons.arrowLeft(18)} Back to Feed
+            ${Icons.arrowLeft(18)} Back to Marketplace
           </div>
 
-          <div class="card" style="padding: 32px 28px;">
+          <div class="card" style="padding: 32px 28px; border-radius: var(--radius-lg);">
+            <!-- Flow Type Switcher: Item Offer vs Seeker Need -->
             <div style="margin-bottom: 24px;">
-              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
                 <span class="badge badge-borrow" style="font-size: 11px;">Fast 60s Flow</span>
                 <span style="font-size: 12px; color: var(--color-text-secondary);">Campus Gated Listing</span>
               </div>
-              <h1 style="font-size: 26px; font-weight: 700;">List an Item or Skill</h1>
+              <h1 style="font-size: 26px; font-weight: 700; margin-bottom: 4px;">Post to Campus Network</h1>
               <p style="font-size: 14px; color: var(--color-text-secondary);">
-                Share with verified batchmates across your residential hostel campus.
+                Choose whether you're offering an idle item/skill or asking for something you need.
               </p>
             </div>
 
-            <form id="new-listing-form" onsubmit="event.preventDefault();">
+            <!-- Segmented Top Mode: Offer Item vs I Need This (§3.1) -->
+            <div class="marketplace-main-tabs" style="margin-bottom: 24px;">
+              <button class="market-tab-btn active" id="btn-post-type-offer">
+                ${Icons.tag(16)} List Item / Skill (Offer)
+              </button>
+              <button class="market-tab-btn" id="btn-post-type-need">
+                ${Icons.helpCircle(16)} "I Need This" (Seeker Request)
+              </button>
+            </div>
+
+            <!-- 1. Offer Item Form -->
+            <form id="offer-item-form" onsubmit="event.preventDefault();">
               <!-- Photo Selection -->
               <div class="form-group">
                 <label class="form-label">Item Photo</label>
@@ -34,7 +46,7 @@ const NewListingView = {
                     <img id="active-photo-img" src="${PRESET_PHOTO_OPTIONS[0].url}" style="width: 100%; height: 100%; object-fit: cover;" alt="Preview" />
                   </div>
                   <div>
-                    <div style="font-size: 13.5px; font-weight: 600; color: var(--color-text-primary);">Choose a preset photo or upload:</div>
+                    <div style="font-size: 13.5px; font-weight: 600; color: var(--color-text-primary);">Choose a preset photo or select:</div>
                     <div style="font-size: 12px; color: var(--color-text-secondary);">Instant high-res photo picker for quick listings</div>
                   </div>
                 </div>
@@ -72,13 +84,12 @@ const NewListingView = {
                   <option value="Skills & Coaching">Skills, Mock Interviews & Peer Coaching</option>
                   <option value="Stationery">Stationery & Room Supplies</option>
                   <option value="Bulk Resale">Bulk Resale & Essentials</option>
-                  <option value="Other">Other Campus Utility</option>
                 </select>
               </div>
 
               <!-- Segmented Mode Control: Share / Sell / Give Away -->
               <div class="form-group">
-                <label class="form-label">Listing Type *</label>
+                <label class="form-label">Exchange Terms *</label>
                 <div class="segmented-control">
                   <button type="button" class="segmented-btn active" data-mode="share" id="mode-share-btn">
                     ${Icons.briefcase(14)} Share (Lend)
@@ -98,10 +109,10 @@ const NewListingView = {
                 <div id="fields-share">
                   <label class="form-label" style="font-size: 13px;">Max Borrow Duration / Return Terms</label>
                   <input type="text" id="share-terms" class="form-input" value="Borrow for up to 3 days (Please return clean)" />
-                  <div class="form-hint">Let your batchmate know when you expect the item back.</div>
+                  <div class="form-hint">Set a return date so batchmates know when you need it back.</div>
                 </div>
 
-                <!-- Sell Fields (Hidden by default) -->
+                <!-- Sell Fields -->
                 <div id="fields-sell" style="display: none;">
                   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
                     <div>
@@ -116,7 +127,7 @@ const NewListingView = {
                   <div class="form-hint">Payment is settled directly on handoff via UPI / Cash.</div>
                 </div>
 
-                <!-- Give Away Fields (Hidden by default) -->
+                <!-- Give Away Fields -->
                 <div id="fields-give" style="display: none;">
                   <div style="display: flex; align-items: center; gap: 8px; color: var(--color-accent-amber); font-weight: 600; font-size: 14px;">
                     ${Icons.sparkles(16)} 100% Free Campus Gift
@@ -127,7 +138,7 @@ const NewListingView = {
                 </div>
               </div>
 
-              <!-- Multiple Units / Bulk Reseller Toggle (§5.5) -->
+              <!-- Multiple Units / Bulk Reseller Toggle -->
               <div class="card" style="background: #FFFFFF; border: 1px solid var(--color-border); padding: 14px 16px; margin-bottom: 20px;">
                 <div style="display: flex; align-items: center; justify-content: space-between;">
                   <div>
@@ -135,34 +146,13 @@ const NewListingView = {
                       Listing multiple units / bulk inventory?
                     </div>
                     <div style="font-size: 12px; color: var(--color-text-secondary);">
-                      For student distributors, bulk study merchandise, or batch lots.
+                      For student distributors or wholesale lots.
                     </div>
                   </div>
                   <label style="position: relative; display: inline-block; width: 44px; height: 24px; cursor: pointer;">
                     <input type="checkbox" id="toggle-multiple-units" style="opacity: 0; width: 0; height: 0;" />
                     <span style="position: absolute; inset: 0; background-color: #CCC; border-radius: 34px; transition: .3s;" id="toggle-slider"></span>
                   </label>
-                </div>
-
-                <!-- Inline Verified Seller Nudge (§5.5) -->
-                <div id="bulk-verify-nudge" style="display: none; margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--color-border);">
-                  <div style="display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--color-text-secondary);">
-                    <span style="color: var(--color-primary);">${Icons.shieldCheck(18)}</span>
-                    <div>
-                      <strong>Verified Seller Required:</strong> Bulk & multiple-unit listings are tagged with a Verified Seller trust badge.
-                      ${!isVerifiedSeller ? `
-                        <div style="margin-top: 6px;">
-                          <a href="javascript:void(0)" onclick="NewListingView.handleUnlockVerifiedSeller()" style="font-weight: 700; color: var(--color-primary); text-decoration: underline;">
-                            Upload Campus ID to unlock Verified Seller status →
-                          </a>
-                        </div>
-                      ` : `
-                        <div style="color: var(--color-secondary); font-weight: 700; margin-top: 4px;">
-                          ✓ You are already ID-Verified for bulk listings!
-                        </div>
-                      `}
-                    </div>
-                  </div>
                 </div>
               </div>
 
@@ -198,7 +188,69 @@ const NewListingView = {
 
               <!-- Submit Button -->
               <button type="submit" id="btn-submit-listing" class="btn btn-primary btn-full btn-lg" style="margin-top: 10px;">
-                ${Icons.plus(18)} Post Listing to Feed
+                ${Icons.plus(18)} Post Item to Marketplace
+              </button>
+            </form>
+
+            <!-- 2. "I Need This" Seeker Form (§3.1) -->
+            <form id="need-request-form" style="display: none;" onsubmit="event.preventDefault();">
+              <div class="form-group">
+                <label class="form-label">What item or gear do you need? *</label>
+                <input 
+                  type="text" 
+                  id="seek-need-title" 
+                  class="form-input" 
+                  placeholder="e.g. Navy Blazer Size 38, TI-84 Calculator, HDMI adapter..." 
+                  required 
+                  autocomplete="off"
+                />
+              </div>
+
+              <!-- Inline Match Nudge (§3.1) -->
+              <div id="inline-match-nudge-box" style="display: none; margin-bottom: 20px; background: #EEECFC; border: 1.5px solid var(--color-primary); border-radius: var(--radius-md); padding: 14px 16px;">
+                <div style="font-size: 13.5px; font-weight: 700; color: var(--color-primary); display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                  ${Icons.sparkles(16, 'var(--color-primary)')} Good news — batchmates already listed something like this!
+                </div>
+                <p style="font-size: 12.5px; color: var(--color-text-secondary);">
+                  Check these available marketplace listings before posting a separate request:
+                </p>
+                <div id="inline-match-nudge-items" style="margin-top: 10px; display: flex; flex-direction: column; gap: 6px;"></div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Category *</label>
+                <select id="seek-need-category" class="form-select">
+                  <option value="Formal Wear">Formal Wear (Suits, Ties, Shoes)</option>
+                  <option value="Electronics">Electronics & Calculators</option>
+                  <option value="Books & Notes">Books & Cheat Sheets</option>
+                  <option value="Sports Gear">Sports & Fitness</option>
+                  <option value="Skills & Coaching">Skills & Peer Coaching</option>
+                  <option value="Stationery">Stationery & Room Supplies</option>
+                </select>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                <div class="form-group">
+                  <label class="form-label">Needed By *</label>
+                  <input type="text" id="seek-need-by" class="form-input" placeholder="e.g. Tomorrow, 9:00 AM" value="Tomorrow, 6:00 PM" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Terms Preference</label>
+                  <select id="seek-need-terms" class="form-select">
+                    <option value="either" selected>Borrow or Buy</option>
+                    <option value="borrow-only">Borrow Only</option>
+                    <option value="willing-to-pay">Willing to Pay / Rent</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Context & Urgency</label>
+                <textarea id="seek-need-desc" class="form-textarea" rows="3" placeholder="Why do you need this, and where in the hostel can someone find you?"></textarea>
+              </div>
+
+              <button type="submit" id="btn-submit-seek-need" class="btn btn-primary btn-full btn-lg" style="margin-top: 10px; background: #E88813; border-color: #E88813;">
+                ${Icons.helpCircle(18)} Post Need to Campus Feed
               </button>
             </form>
           </div>
@@ -207,40 +259,28 @@ const NewListingView = {
     `;
   },
 
-  handleUnlockVerifiedSeller() {
-    Modal.open({
-      title: "Unlock Verified Seller Status",
-      contentHtml: `
-        <div style="text-align: center;">
-          <div style="width: 52px; height: 52px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px auto;">
-            ${Icons.upload(24)}
-          </div>
-          <p style="font-size: 14px; margin-bottom: 16px;">
-            To maintain campus safety and prevent unverified commercial spam, batch resale requires student ID confirmation.
-          </p>
-          <div class="dropzone" id="quick-id-dropzone" style="margin-bottom: 16px;">
-            <div style="font-weight: 700; font-size: 14px;">Click to simulate Student ID verification</div>
-            <div style="font-size: 12px; color: var(--color-text-secondary);">Instant verification for demo</div>
-          </div>
-        </div>
-      `,
-      footerHtml: `<button class="btn btn-primary btn-sm" id="btn-quick-verify-done">Verify & Continue</button>`
+  afterRender() {
+    let currentOfferMode = "share";
+    let selectedPhotoUrl = PRESET_PHOTO_OPTIONS[0].url;
+
+    const offerTabBtn = document.getElementById("btn-post-type-offer");
+    const needTabBtn = document.getElementById("btn-post-type-need");
+    const offerForm = document.getElementById("offer-item-form");
+    const needForm = document.getElementById("need-request-form");
+
+    offerTabBtn?.addEventListener("click", () => {
+      offerTabBtn.classList.add("active");
+      needTabBtn?.classList.remove("active");
+      if (offerForm) offerForm.style.display = "block";
+      if (needForm) needForm.style.display = "none";
     });
 
-    const verifyAction = () => {
-      appState.currentUser.isVerifiedSeller = true;
-      Modal.close();
-      Toast.success("Verified Seller badge unlocked! 🎉");
-      Router.renderCurrentRoute();
-    };
-
-    document.getElementById("quick-id-dropzone")?.addEventListener("click", verifyAction);
-    document.getElementById("btn-quick-verify-done")?.addEventListener("click", verifyAction);
-  },
-
-  afterRender() {
-    let currentMode = "share";
-    let selectedPhotoUrl = PRESET_PHOTO_OPTIONS[0].url;
+    needTabBtn?.addEventListener("click", () => {
+      needTabBtn.classList.add("active");
+      offerTabBtn?.classList.remove("active");
+      if (offerForm) offerForm.style.display = "none";
+      if (needForm) needForm.style.display = "block";
+    });
 
     // Preset photo picker
     document.querySelectorAll(".preset-photo-thumb").forEach(thumb => {
@@ -253,7 +293,7 @@ const NewListingView = {
       });
     });
 
-    // Segmented Mode Controls
+    // Segmented Mode Controls in Offer form
     const modeShareBtn = document.getElementById("mode-share-btn");
     const modeSellBtn = document.getElementById("mode-sell-btn");
     const modeGiveBtn = document.getElementById("mode-give-btn");
@@ -263,7 +303,7 @@ const NewListingView = {
     const fieldsGive = document.getElementById("fields-give");
 
     const setMode = (mode) => {
-      currentMode = mode;
+      currentOfferMode = mode;
       [modeShareBtn, modeSellBtn, modeGiveBtn].forEach(b => b?.classList.remove("active"));
       if (fieldsShare) fieldsShare.style.display = "none";
       if (fieldsSell) fieldsSell.style.display = "none";
@@ -288,23 +328,36 @@ const NewListingView = {
     // Multiple units toggle
     const toggle = document.getElementById("toggle-multiple-units");
     const slider = document.getElementById("toggle-slider");
-    const nudge = document.getElementById("bulk-verify-nudge");
-
     toggle?.addEventListener("change", (e) => {
-      const isChecked = e.target.checked;
-      if (slider) {
-        slider.style.backgroundColor = isChecked ? "var(--color-primary)" : "#CCC";
-      }
-      if (nudge) {
-        nudge.style.display = isChecked ? "block" : "none";
+      if (slider) slider.style.backgroundColor = e.target.checked ? "var(--color-primary)" : "#CCC";
+    });
+
+    // Match nudge input listener for Seeker Need Form (§3.1)
+    const needTitleInput = document.getElementById("seek-need-title");
+    const matchBox = document.getElementById("inline-match-nudge-box");
+    const matchItems = document.getElementById("inline-match-nudge-items");
+
+    needTitleInput?.addEventListener("input", (e) => {
+      const q = e.target.value;
+      const cat = document.getElementById("seek-need-category")?.value;
+      const matches = appState.findMatchingListingsForNeed(q, cat);
+
+      if (matches.length > 0) {
+        matchBox.style.display = "block";
+        matchItems.innerHTML = matches.map(m => `
+          <a href="#/item/${m.id}" style="font-size: 13px; font-weight: 600; color: var(--color-primary); display: flex; align-items: center; justify-content: space-between; background: #FFFFFF; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--color-border); text-decoration: none;">
+            <span>${m.title} (${m.mode.toUpperCase()})</span>
+            <span style="font-size: 12px; color: var(--color-text-secondary);">View Available Item →</span>
+          </a>
+        `).join("");
+      } else {
+        matchBox.style.display = "none";
       }
     });
 
-    // Form submission
-    const form = document.getElementById("new-listing-form");
-    form?.addEventListener("submit", (e) => {
+    // Offer form submit
+    offerForm?.addEventListener("submit", (e) => {
       e.preventDefault();
-
       const title = document.getElementById("listing-title")?.value?.trim();
       const category = document.getElementById("listing-category")?.value;
       const desc = document.getElementById("listing-desc")?.value?.trim();
@@ -316,7 +369,7 @@ const NewListingView = {
       let originalPrice = null;
       let terms = "Standard campus exchange";
 
-      if (currentMode === "sell") {
+      if (currentOfferMode === "sell") {
         price = document.getElementById("sell-price")?.value;
         originalPrice = document.getElementById("sell-original-price")?.value;
         terms = "Payment on handoff via UPI/Cash";
@@ -324,7 +377,7 @@ const NewListingView = {
           Toast.warning("Please enter a selling price");
           return;
         }
-      } else if (currentMode === "share") {
+      } else if (currentOfferMode === "share") {
         terms = document.getElementById("share-terms")?.value || "Return in 3 days";
       } else {
         terms = "100% Free gift. No return expected.";
@@ -335,30 +388,50 @@ const NewListingView = {
         return;
       }
 
-      const submitBtn = document.getElementById("btn-submit-listing");
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = `Publishing listing...`;
+      appState.addListing({
+        title,
+        category,
+        mode: currentOfferMode,
+        description: desc,
+        location,
+        condition,
+        photoUrl: selectedPhotoUrl,
+        price,
+        originalPrice,
+        terms,
+        isMultipleUnits: isMultiple
+      });
+
+      Toast.success("Listing published live to Campus Feed! 🎉");
+      appState.setMarketplaceTab("browse");
+      Router.navigate("#/feed");
+    });
+
+    // Seeker Need form submit
+    needForm?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const title = document.getElementById("seek-need-title")?.value?.trim();
+      const category = document.getElementById("seek-need-category")?.value;
+      const neededBy = document.getElementById("seek-need-by")?.value?.trim() || "This week";
+      const terms = document.getElementById("seek-need-terms")?.value;
+      const desc = document.getElementById("seek-need-desc")?.value?.trim() || "Urgent campus need";
+
+      if (!title) {
+        Toast.warning("Please enter what you need");
+        return;
       }
 
-      setTimeout(() => {
-        const created = appState.addListing({
-          title,
-          category,
-          mode: currentMode,
-          description: desc,
-          location,
-          condition,
-          photoUrl: selectedPhotoUrl,
-          price,
-          originalPrice,
-          terms,
-          isMultipleUnits: isMultiple
-        });
+      appState.addNeed({
+        title,
+        category,
+        neededBy,
+        terms,
+        description: desc
+      });
 
-        Toast.success("Listing published live to Campus Feed! 🎉");
-        Router.navigate("#/feed");
-      }, 500);
+      Toast.success("Need posted to Campus Feed! 🎉");
+      appState.setMarketplaceTab("needs");
+      Router.navigate("#/feed");
     });
   }
 };

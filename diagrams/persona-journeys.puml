@@ -5,58 +5,74 @@ skinparam roundcorner 12
 skinparam sequenceArrowThickness 2
 skinparam defaultFontName "Plus Jakarta Sans"
 
-title Peerly — Persona Interaction & Exchange Flows
+title Peerly v2 — 4-Pillar Persona Interaction & Journey Flows
 
-actor "Haripriya M.\n(Seeker / Demand)" as Seeker
-actor "Jean R.\n(Idle Owner / Supply)" as Owner
-actor "Thirupathi M.\n(Bulk-Reseller / Commerce)" as Reseller
-participant "Peerly Marketplace\n(Feed & Search)" as Feed
-participant "Item Detail &\nChat Drawer" as Detail
-participant "Accountability &\nTrust Engine" as Trust
+actor "Haripriya M.\n(Seeker / Marketing)" as Haripriya
+actor "Jean R.\n(Idle Owner / Finance)" as Jean
+actor "Meera K.\n(Finance Lead / Peer)" as Meera
+actor "Rohan K.\n(Case Comp Lead)" as Rohan
+actor "Thirupathi M.\n(Bulk-Reseller)" as Thiru
 
-== Journey 1: Haripriya (Seeker) borrows a Blazer for Case Finals ==
-Seeker -> Feed : Searches "Blazer" or taps "Borrow" chip
-Feed --> Seeker : Displays Navy Blazer (Size 40/M) in Hostel 3
-Seeker -> Detail : Opens listing (#/item/l1)
-Detail --> Seeker : Shows condition ("Like New"), location, owner trust score
-Seeker -> Detail : Taps "Request to Borrow"
-Detail -> Detail : Simulated accept spinner (500ms)
-Detail --> Seeker : "Request Accepted!" with Return-by Date: "Thursday, 6:00 PM"
-Seeker -> Detail : Taps "Open Chat"
-Detail --> Seeker : Opens scripted chat drawer with Owner (Hostel 3 pickup)
-Seeker -> Owner : Coordinates pickup at Hostel 3 lobby
+participant "Marketplace & Needs\n(Pillar: Things)" as Market
+participant "Connect & Pairing\n(Pillar: Skills)" as Connect
+participant "Community Board\n(Pillar: Help)" as Community
+participant "Opportunities Radar\n(Pillar: Knowledge)" as Opps
+participant "Trust & Accountability\nEngine" as Trust
 
-== Journey 2: Jean R. (Passive Idle Owner) lists TI-84 in <60 Seconds ==
-Owner -> Feed : Taps "+ Post an Item"
-Feed -> Detail : Opens rapid Create Listing (#/new-listing)
-Owner -> Detail : Selects preset photo "Calculator", Title: "TI-84 Plus CE"
-Owner -> Detail : Toggles Mode: "Share (Lend)", Sets Return Terms: "3 Days / Exam Week"
-Owner -> Detail : Taps "Post Item"
-Detail -> Feed : Instantly adds item to top of live Campus Feed
-Feed --> Owner : Success Toast & Live Listing Visibility
-note over Owner, Feed
-  Jean's calculator is now discoverable campus-wide
-  without sending a single spam message on WhatsApp.
-end note
+== Journey 1: Things — Haripriya borrows a Navy Blazer for Case Finals ==
+Haripriya -> Market : Searches "Blazer" on Browse tab
+Market --> Haripriya : Displays Navy Blazer (Size 40/M) in Hostel 3
+Haripriya -> Market : Opens item (#/item/l1) & taps "Request to Borrow"
+Market -> Market : Simulates request acceptance (500ms)
+Market --> Haripriya : "Request Accepted!" with Return-by Date ("Tomorrow, 6:00 PM")
+Haripriya -> Market : Opens scripted chat drawer with Rohan
+Haripriya -> Rohan : Coordinates lobby pickup at Hostel 3
 
-== Journey 3: Thirupathi (Bulk Reseller) Sells Insulated Water Bottles ==
-Reseller -> Detail : Opens Create Listing flow (#/new-listing)
-Reseller -> Detail : Toggles Mode: "Sell", Price: ₹299 (MRP: ₹799)
-Reseller -> Detail : Switches ON "Listing multiple units / bulk inventory?"
-Detail -> Trust : Checks ID Verification status
-Trust --> Detail : Confirms "Verified Seller" badge unlocked
-Reseller -> Feed : Publishes listing
-Feed --> Seeker : Shows item with "Verified Seller Batch" badge
-Seeker -> Detail : Taps "Buy for ₹299" -> Scripted handoff with UPI payment on delivery
+== Journey 2: Things (Reverse Need) — Haripriya posts "Need Speaker" with Duplicate Nudge ==
+Haripriya -> Market : Taps "Post a Need" -> Types "Bluetooth Speaker"
+Market -> Market : Evaluates title against mockData inventory
+Market --> Haripriya : Nudge Banner: "Good news — 2 batchmates already listed something similar!"
+Haripriya -> Market : Confirms Need post with "Borrow Only" terms
+Market --> Jean : Need appears in "Campus Needs" feed
+Jean -> Market : Taps "I Have This"
+Market --> Haripriya : Opens chat drawer with Jean to coordinate handoff
 
-== Journey 4: Closed-Loop Return & Peer Accountability ==
-Seeker -> Trust : Opens "My Peerly" (#/profile) -> Views Active Borrow Card
-Seeker -> Trust : Taps "Mark as Returned"
-Trust --> Seeker : Prompts Condition Check: "Returned in good condition?" (Yes/No)
-Seeker -> Trust : Selects "Yes, Perfect Condition"
-Trust --> Seeker : Prompts Peer Rating: "Rate experience with Owner: 👍 / 👎"
-Seeker -> Trust : Selects "👍 Smooth & Friendly!"
-Trust -> Trust : Bumps Owner's Trust Score (👍 19, 100%)
-Trust -> Trust : Clears active borrow and updates campus trust index
+== Journey 3: Skills — Connect Hub, "People to Learn From" & Peer Pairing ==
+Haripriya -> Connect : Opens Connect Hub (#/connect)
+Connect -> Connect : Compares Haripriya's interests (Finance) against cohort skills
+Connect --> Haripriya : "People to Learn From" card: "Meera K. can help with: Excel modeling, Valuation basics"
+Haripriya -> Meera : Taps "Say Hi" -> Unlocks scripted peer chat
+Haripriya -> Connect : Switches ON "Join Peer Pairing" toggle
+Haripriya -> Connect : Taps "Simulate This Week's Pairing"
+Connect --> Haripriya : Paired with Meera + Shared Icebreaker: "You both follow Consulting — discuss the Bain case!"
+
+== Journey 4: Help — Community Board CaseComp Team-Up ==
+Rohan -> Community : Posts 🤝 Team-Up: "Need 1 more for CaseComp Nationals (Marketing/GTM focus)"
+Community --> Haripriya : Post rendered in Community Board feed
+Haripriya -> Community : Taps "I'm Interested"
+Community -> Community : Adds Haripriya's avatar to post interest roster & fires notification
+Rohan -> Community : Views interested batchmates & taps "Message" to connect
+
+== Journey 5: Knowledge — Personalized Opportunities Radar ==
+Haripriya -> Opps : Opens Opportunities Radar (#/opportunities)
+Opps -> Opps : Filters 15+ curated competitions against Haripriya's interests
+Opps --> Haripriya : Displays "Recommended for You" (Bain Case Challenge, Swiggy APM, BCG)
+Opps --> Haripriya : Highlights "Closing in 3 days" with animated amber urgency pill
+Haripriya -> Opps : Taps "Customize My Radar Tags" to add "Venture Capital"
+Opps -> Opps : Real-time re-filtering renders new recommendations instantly
+
+== Journey 6: Things (Resale) — Thirupathi Sells Insulated Water Bottles ==
+Thiru -> Market : Opens "+ Post an Item" (#/new-listing) -> Mode: "Sell", ₹299
+Thiru -> Market : Switches ON "Listing multiple units / bulk inventory"
+Market -> Trust : Checks ID verification status -> Confirms Verified Seller badge
+Market --> Haripriya : Shows item with "Verified Seller Batch" badge
+Haripriya -> Market : Taps "Buy for ₹299" -> Scripted handoff with UPI on delivery
+
+== Journey 7: Trust & Closed-Loop Accountability ==
+Haripriya -> Trust : Opens "My Peerly" (#/profile) -> Views active borrow countdown card
+Haripriya -> Trust : Taps "Mark as Returned"
+Trust --> Haripriya : Step 1: "Returned in good condition?" -> Selects "Yes, Perfect Condition"
+Trust --> Haripriya : Step 2: "Rate peer interaction" -> Selects "👍 Smooth & Friendly!"
+Trust -> Trust : Increments Rohan's rating (👍 19, 100%) & clears active borrow card
 
 @enduml

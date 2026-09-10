@@ -1,4 +1,4 @@
-// js/views/onboarding.js - 4-Step Simulated Onboarding Wizard
+// js/views/onboarding.js - 5-Step Enriched Onboarding Wizard for v2
 
 const OnboardingView = {
   render() {
@@ -11,7 +11,7 @@ const OnboardingView = {
           <!-- Stepper Header -->
           <div class="stepper-header">
             <div class="stepper-track"></div>
-            <div class="stepper-progress" style="width: ${((step - 1) / 3) * 100}%;"></div>
+            <div class="stepper-progress" style="width: ${((step - 1) / 4) * 100}%;"></div>
 
             <div class="stepper-step ${step >= 1 ? (step > 1 ? 'completed' : 'active') : ''}">
               <div class="stepper-circle">${step > 1 ? Icons.check(14) : '1'}</div>
@@ -25,11 +25,16 @@ const OnboardingView = {
 
             <div class="stepper-step ${step >= 3 ? (step > 3 ? 'completed' : 'active') : ''}">
               <div class="stepper-circle">${step > 3 ? Icons.check(14) : '3'}</div>
+              <span class="stepper-label">Profile</span>
+            </div>
+
+            <div class="stepper-step ${step >= 4 ? (step > 4 ? 'completed' : 'active') : ''}">
+              <div class="stepper-circle">${step > 4 ? Icons.check(14) : '4'}</div>
               <span class="stepper-label">ID Badge</span>
             </div>
 
-            <div class="stepper-step ${step === 4 ? 'completed' : ''}">
-              <div class="stepper-circle">${step === 4 ? Icons.check(14) : '4'}</div>
+            <div class="stepper-step ${step === 5 ? 'completed' : ''}">
+              <div class="stepper-circle">${step === 5 ? Icons.check(14) : '5'}</div>
               <span class="stepper-label">Complete</span>
             </div>
           </div>
@@ -49,12 +54,12 @@ const OnboardingView = {
         return `
           <div style="text-align: center; margin-bottom: 24px;">
             <h2 style="font-size: 24px; margin-bottom: 8px;">Select Your Campus</h2>
-            <p style="font-size: 14px;">Peerly is a closed, trusted network restricted to verified residential B-school students.</p>
+            <p style="font-size: 14px;">Peerly is a trusted closed campus network restricted to verified residential B-school students.</p>
           </div>
 
           <div style="margin-bottom: 24px;">
             <div style="display: flex; flex-direction: column; gap: 12px;">
-              ${MOCK_CAMPUSES.map((campus, idx) => `
+              ${MOCK_CAMPUSES.map(campus => `
                 <div class="card card-hover campus-select-card ${data.campus?.id === campus.id ? 'selected' : ''}" 
                      data-id="${campus.id}"
                      style="padding: 16px; cursor: pointer; border-color: ${data.campus?.id === campus.id ? 'var(--color-primary)' : 'var(--color-border)'}; background: ${data.campus?.id === campus.id ? 'var(--color-primary-light)' : '#FFFFFF'};">
@@ -107,7 +112,7 @@ const OnboardingView = {
               <input type="text" maxlength="1" class="otp-digit" id="otp-4" value="9" />
             </div>
             <div style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 24px;">
-              ${Icons.sparkles(13, '#2DBFA0')} Simulated Demo: Any 4 digits will verify instantly!
+              ${Icons.sparkles(13, '#2DBFA0')} Simulated Demo: Code 4829 auto-filled!
             </div>
           </div>
 
@@ -122,6 +127,61 @@ const OnboardingView = {
         `;
 
       case 3:
+        // New in v2: Profile & Radar Preferences
+        const allBg = ["Marketing", "Strategy", "Consulting", "Finance", "Operations", "Analytics", "Engineering", "Design"];
+        const allInterests = ["Finance", "Consulting", "Product Management", "Analytics", "Venture Capital", "Strategy", "Marketing", "AI Tools"];
+
+        return `
+          <div style="text-align: center; margin-bottom: 24px;">
+            <div class="badge" style="background: var(--color-primary-light); color: var(--color-primary); font-size: 11px; margin-bottom: 6px;">
+              Personalized Radar & Connect
+            </div>
+            <h2 style="font-size: 24px; margin-bottom: 6px;">Your Domain & Radar Interests</h2>
+            <p style="font-size: 14px;">Powers peer-pairing matches, skill swaps, and daily curated opportunities.</p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Cohort Batch Year</label>
+            <select id="onboarding-batch-select" class="form-select">
+              <option value="PGP 2026" selected>PGP 2026 (1st Year)</option>
+              <option value="PGP 2025">PGP 2025 (Graduating)</option>
+              <option value="PGP 2027">PGP 2027 (Incoming)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Your Background / Specialization</label>
+            <div class="tag-selector-grid" id="onb-bg-tags">
+              ${allBg.map(bg => `
+                <button type="button" class="tag-toggle-btn ${(data.background || ["Marketing", "Strategy"]).includes(bg) ? 'active' : ''}" data-val="${bg}">
+                  ${bg}
+                </button>
+              `).join("")}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Interests You Want to Learn / Opportunities Target</label>
+            <div class="tag-selector-grid" id="onb-interest-tags">
+              ${allInterests.map(int => `
+                <button type="button" class="tag-toggle-btn ${(data.interests || ["Finance", "Consulting", "Product Management"]).includes(int) ? 'active' : ''}" data-val="${int}">
+                  ${int}
+                </button>
+              `).join("")}
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px; margin-top: 24px;">
+            <button id="btn-step3-back" class="btn btn-ghost btn-lg" style="flex: 1;">
+              Back
+            </button>
+            <button id="btn-step3-next" class="btn btn-primary btn-lg" style="flex: 2;">
+              Save & Continue ${Icons.arrowRight(16)}
+            </button>
+          </div>
+        `;
+
+      case 4:
         return `
           <div style="text-align: center; margin-bottom: 24px;">
             <h2 style="font-size: 24px; margin-bottom: 8px;">Upload Student ID (Optional)</h2>
@@ -139,22 +199,17 @@ const OnboardingView = {
             </span>
           </div>
 
-          <div style="background: var(--color-surface-alt); padding: 14px; border-radius: var(--radius-md); font-size: 13px; color: var(--color-text-secondary); margin-bottom: 24px; display: flex; align-items: flex-start; gap: 10px;">
-            <span style="color: var(--color-primary);">${Icons.info(18)}</span>
-            <span>You can always skip this and verify later from your profile. Basic borrowing and lending only require email verification!</span>
-          </div>
-
-          <div style="display: flex; gap: 12px;">
-            <button id="btn-step3-skip" class="btn btn-secondary btn-lg" style="flex: 1;">
+          <div style="display: flex; gap: 12px; margin-top: 24px;">
+            <button id="btn-step4-skip" class="btn btn-secondary btn-lg" style="flex: 1;">
               Skip for now
             </button>
-            <button id="btn-step3-upload" class="btn btn-teal btn-lg" style="flex: 1.5;">
+            <button id="btn-step4-upload" class="btn btn-teal btn-lg" style="flex: 1.5;">
               Upload & Get Badge ${Icons.arrowRight(16)}
             </button>
           </div>
         `;
 
-      case 4:
+      case 5:
         return `
           <div style="text-align: center; padding: 20px 0;">
             <div style="width: 72px; height: 72px; border-radius: 50%; background: var(--color-secondary-light); color: var(--color-secondary); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; animation: pulse 1.5s infinite;">
@@ -163,28 +218,28 @@ const OnboardingView = {
 
             <h2 style="font-size: 28px; margin-bottom: 10px;">You're In!</h2>
             <p style="font-size: 15px; color: var(--color-text-secondary); max-width: 440px; margin: 0 auto 20px auto;">
-              Welcome to the <strong>${data.campus?.name || 'Great Lakes Chennai'}</strong> campus network.
+              Welcome to the <strong>${data.campus?.name?.split('(')[0] || 'Great Lakes Chennai'}</strong> campus network.
             </p>
 
             <div style="display: inline-flex; align-items: center; gap: 8px; background: #FFFFFF; border: 1.5px solid var(--color-secondary); padding: 8px 18px; border-radius: var(--radius-full); margin-bottom: 28px; box-shadow: var(--shadow-sm);">
               <span style="color: var(--color-secondary);">${Icons.shieldCheck(18)}</span>
               <span style="font-weight: 700; font-size: 14px; color: var(--color-text-primary);">
-                Verified Student · ${data.campus?.name?.split('(')[0] || 'GLIM'}
+                Verified Student · ${data.batch || 'PGP 2026'}
               </span>
-              ${data.idUploaded ? `<span class="badge badge-verified-seller" style="margin-left: 6px;">Verified Seller</span>` : ''}
             </div>
 
             <div style="background: var(--color-surface-alt); padding: 18px; border-radius: var(--radius-lg); text-align: left; margin-bottom: 28px; font-size: 13.5px;">
-              <div style="font-weight: 700; color: var(--color-text-primary); margin-bottom: 8px;">What you can do now:</div>
+              <div style="font-weight: 700; color: var(--color-text-primary); margin-bottom: 8px;">What's unlocked in your Campus OS:</div>
               <ul style="padding-left: 20px; line-height: 1.7; color: var(--color-text-secondary);">
-                <li>Browse and request items from batchmates two corridors away</li>
-                <li>List your idle blazers, calculators, or notes in under 60 seconds</li>
-                <li>Build a campus trust score with on-time returns</li>
+                <li><strong>Marketplace & Needs:</strong> Borrow formal wear, gear, or post reverse requests</li>
+                <li><strong>Connect:</strong> Meet batchmates & automatic biweekly coffee pairing</li>
+                <li><strong>Community:</strong> Post hackathon team-ups and informal favors</li>
+                <li><strong>Opportunities Radar:</strong> Personalized deadline alerts tailored to you</li>
               </ul>
             </div>
 
-            <button id="btn-step4-feed" class="btn btn-primary btn-full btn-lg">
-              Explore Campus Feed Now ${Icons.arrowRight(16)}
+            <button id="btn-step5-feed" class="btn btn-primary btn-full btn-lg">
+              Open Campus Operating System ${Icons.arrowRight(16)}
             </button>
           </div>
         `;
@@ -226,42 +281,61 @@ const OnboardingView = {
         Toast.success("OTP sent to your campus email! (Code: 4829)");
       });
 
-      // Auto-advance between OTP digit inputs
-      const otpInputs = [
-        document.getElementById("otp-1"),
-        document.getElementById("otp-2"),
-        document.getElementById("otp-3"),
-        document.getElementById("otp-4")
-      ];
-      otpInputs.forEach((input, index) => {
-        input?.addEventListener("input", () => {
-          if (input.value && index < otpInputs.length - 1) {
-            otpInputs[index + 1].focus();
-          }
-        });
-        input?.addEventListener("keydown", (e) => {
-          if (e.key === "Backspace" && !input.value && index > 0) {
-            otpInputs[index - 1].focus();
-          }
-        });
-      });
-
       document.getElementById("btn-step2-verify")?.addEventListener("click", (e) => {
         const btn = e.currentTarget;
         btn.disabled = true;
-        btn.innerHTML = `<span style="display:inline-block;animation:spin 1s linear infinite;">⏳</span> Verifying .edu credentials...`;
+        btn.innerHTML = `Verifying...`;
 
         setTimeout(() => {
           const email = document.getElementById("onboarding-email")?.value || "haripriya.m@greatlakes.edu.in";
           appState.updateOnboardingData({ email: email });
           appState.setOnboardingStep(3);
           Router.renderCurrentRoute();
-          Toast.success("Email verified successfully! 🎉");
-        }, 600);
+          Toast.success("Email verified! 🎉");
+        }, 500);
       });
     }
 
     if (step === 3) {
+      document.getElementById("btn-step3-back")?.addEventListener("click", () => {
+        appState.setOnboardingStep(2);
+        Router.renderCurrentRoute();
+      });
+
+      let selectedBg = appState.onboardingData.background || ["Marketing", "Strategy"];
+      let selectedInt = appState.onboardingData.interests || ["Finance", "Consulting", "Product Management"];
+
+      document.querySelectorAll("#onb-bg-tags .tag-toggle-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const val = btn.dataset.val;
+          if (selectedBg.includes(val)) selectedBg = selectedBg.filter(x => x !== val);
+          else selectedBg.push(val);
+          btn.classList.toggle("active");
+        });
+      });
+
+      document.querySelectorAll("#onb-interest-tags .tag-toggle-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const val = btn.dataset.val;
+          if (selectedInt.includes(val)) selectedInt = selectedInt.filter(x => x !== val);
+          else selectedInt.push(val);
+          btn.classList.toggle("active");
+        });
+      });
+
+      document.getElementById("btn-step3-next")?.addEventListener("click", () => {
+        const batch = document.getElementById("onboarding-batch-select")?.value || "PGP 2026";
+        appState.updateOnboardingData({
+          batch: batch,
+          background: selectedBg,
+          interests: selectedInt
+        });
+        appState.setOnboardingStep(4);
+        Router.renderCurrentRoute();
+      });
+    }
+
+    if (step === 4) {
       let isUploaded = false;
       const dropzone = document.getElementById("id-dropzone");
       const badgePreview = document.getElementById("id-badge-preview");
@@ -276,29 +350,29 @@ const OnboardingView = {
         Toast.success("Student ID verified! Unlocked Verified Seller badge.");
       });
 
-      document.getElementById("btn-step3-skip")?.addEventListener("click", () => {
+      document.getElementById("btn-step4-skip")?.addEventListener("click", () => {
         appState.updateOnboardingData({ idUploaded: false });
-        appState.setOnboardingStep(4);
+        appState.setOnboardingStep(5);
         Router.renderCurrentRoute();
       });
 
-      document.getElementById("btn-step3-upload")?.addEventListener("click", (e) => {
+      document.getElementById("btn-step4-upload")?.addEventListener("click", (e) => {
         const btn = e.currentTarget;
         btn.disabled = true;
         btn.innerHTML = `Validating ID...`;
         setTimeout(() => {
           appState.updateOnboardingData({ idUploaded: true });
-          appState.setOnboardingStep(4);
+          appState.setOnboardingStep(5);
           Router.renderCurrentRoute();
         }, 500);
       });
     }
 
-    if (step === 4) {
-      document.getElementById("btn-step4-feed")?.addEventListener("click", () => {
+    if (step === 5) {
+      document.getElementById("btn-step5-feed")?.addEventListener("click", () => {
         appState.completeOnboarding();
-        appState.setOnboardingStep(1); // Reset for next time if retested
-        Toast.success("Welcome to Peerly! Happy discovering.");
+        appState.setOnboardingStep(1);
+        Toast.success("Welcome to Peerly v2! Campus fully connected. 🎉");
         Router.navigate("#/feed");
       });
     }
