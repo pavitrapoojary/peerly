@@ -24,11 +24,8 @@
    - [3.7 Community Board Team-Up Lifecycle](#37-community-board-team-up-lifecycle)
 4. [🚀 Universal Feature Specifications & Implementation](#-universal-feature-specifications--implementation)
 5. [🔄 Multi-Disciplinary Personas & Simulation Walkthroughs](#-multi-disciplinary-personas--simulation-walkthroughs)
-6. [💻 Technical Implementation & Code Examples](#-technical-implementation--code-examples)
-7. [📊 Mock Data Schema & Pre-Seeded Inventory](#-mock-data-schema--pre-seeded-inventory)
-8. [📂 PlantUML Diagram Suite (.puml Files)](#-plantuml-diagram-suite-puml-files)
-9. [🔮 Production Roadmap & PM Defense Guide](#-production-roadmap--pm-defense-guide)
-10. [⚡ Quickstart & Local Setup](#-quickstart--local-setup)
+6. [🔮 Production Roadmap & PM Defense Guide](#-production-roadmap--pm-defense-guide)
+7. [⚡ Quickstart & Local Setup](#-quickstart--local-setup)
 
 ---
 
@@ -386,6 +383,14 @@ sequenceDiagram
 - **"Closing Soon" Alerts:** Animated amber urgency pills for competitions closing within 7 days.
 - **Multi-Source Curation:** Curated listings from Unstop, LinkedIn Jobs, Tata Group, BCG Campus, and Campus Notice Boards.
 
+### 5. Unified Landing Page Experience & Value Positioning
+- **Benefit-Led Hero:** 
+  - **Headline:** *"Your campus, fully connected."*
+  - **Subtitle:** *"Borrow and trade with verified peers, swap skills across departments, team up for competitions, and discover opportunities curated for you."*
+- **4-Pillar Visual Elevator Strip:** 4 interactive badge links (`Marketplace`, `Connect`, `Community`, `Opportunities`) allowing visitors to grasp the entire product surface in under 5 seconds.
+- **"A Day in Peerly" 4-Beat Narrative:** Concrete everyday moments mapped to the 4 pillars (borrowing attire/gear in 10s, zero-effort biweekly peer coffee pairing, assembling competition teammates, and tracking closing opportunities).
+- **Campus Density Comparison Table:** Explicitly contrasting Peerly against generic classifieds (OLX / Jugarr) and noisy WhatsApp groups across Discovery, Trust, Relationship Graph, and Curated Radar.
+
 ---
 
 ## 🔄 Multi-Disciplinary Personas & Simulation Walkthroughs
@@ -463,157 +468,6 @@ Use the top **Persona Demo Bar** to switch between pre-seeded personas represent
 4. In Step 1 of the modal, select **"Yes, Perfect Condition"**.
 5. In Step 2, select **"👍 Smooth & Friendly"**.
 6. Submit: The active borrow card clears, and Rohan's trust rating increments to **👍 19 (100%)**.
-
----
-
-## 💻 Technical Implementation & Code Examples
-
-### 1. In-Memory Reactive State Management ([js/state.js](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/state.js))
-Peerly maintains an in-memory singleton `AppState` with a subscriber pattern for zero-reload reactive updates:
-
-```javascript
-class AppState {
-  constructor() {
-    this.listeners = [];
-    this.resetState();
-  }
-
-  resetState() {
-    this.listings = JSON.parse(JSON.stringify(MOCK_LISTINGS));
-    this.users = JSON.parse(JSON.stringify(MOCK_USERS));
-    this.needs = JSON.parse(JSON.stringify(MOCK_NEEDS));
-    this.opportunities = JSON.parse(JSON.stringify(MOCK_OPPORTUNITIES));
-    this.communityPosts = JSON.parse(JSON.stringify(MOCK_COMMUNITY_POSTS));
-    this.currentUser = { ...this.users[0] }; // Haripriya M.
-    this.notify();
-  }
-
-  subscribe(callback) {
-    this.listeners.push(callback);
-    return () => { this.listeners = this.listeners.filter(cb => cb !== callback); };
-  }
-
-  notify() {
-    this.listeners.forEach(cb => cb(this));
-  }
-}
-```
-
-### 2. Client-Side Radar Personalization Engine ([js/state.js](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/state.js))
-
-```javascript
-getPersonalizedOpportunities() {
-  const userInterests = this.currentUser?.interests || [];
-  
-  const recommended = [];
-  const allOthers = [];
-
-  this.opportunities.forEach(opp => {
-    // Real client-side tag overlap matching
-    const matchingTags = opp.tags.filter(tag => userInterests.includes(tag));
-    const isRecommended = matchingTags.length > 0;
-    
-    // Urgency calculation (< 7 days)
-    const daysLeft = this.calculateDaysLeft(opp.deadline);
-    const isClosingSoon = daysLeft <= 7 && daysLeft >= 0;
-
-    const enrichedOpp = {
-      ...opp,
-      matchingTags,
-      matchPercentage: isRecommended ? Math.round((matchingTags.length / opp.tags.length) * 100) : 0,
-      isClosingSoon,
-      daysLeft
-    };
-
-    if (isRecommended) recommended.push(enrichedOpp);
-    else allOthers.push(enrichedOpp);
-  });
-
-  return { recommended, allOthers, total: this.opportunities.length };
-}
-```
-
-### 3. Duplicate Need Detection Algorithm ([js/components/modal.js](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/components/modal.js))
-
-```javascript
-checkDuplicateNeedMatch(inputTitle) {
-  if (!inputTitle || inputTitle.trim().length < 3) return null;
-  const clean = inputTitle.toLowerCase().trim();
-  
-  return appState.listings.find(item => {
-    const itemTitle = item.title.toLowerCase();
-    const itemCat = item.category.toLowerCase();
-    return itemTitle.includes(clean) || clean.includes(itemTitle.slice(0, 5)) || itemCat.includes(clean);
-  });
-}
-```
-
-### 4. Hash Router with Route Parameters ([js/router.js](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/js/router.js))
-
-```javascript
-const routes = {
-  "/": LandingView,
-  "/onboarding": OnboardingView,
-  "/feed": FeedView,
-  "/item/:id": ItemDetailView,
-  "/new-listing": NewListingView,
-  "/connect": ConnectView,
-  "/community": CommunityView,
-  "/opportunities": OpportunitiesView,
-  "/profile": ProfileView
-};
-
-function handleRoute() {
-  const hash = window.location.hash.slice(1) || "/";
-  const matchedView = resolveRoute(hash, routes);
-  document.getElementById("app").innerHTML = matchedView.render();
-  window.scrollTo(0, 0);
-}
-window.addEventListener("hashchange", handleRoute);
-window.addEventListener("DOMContentLoaded", handleRoute);
-```
-
----
-
-## 📊 Mock Data Schema & Pre-Seeded Inventory
-
-### Data Models Summary
-
-```
-┌─────────────────┐       ┌─────────────────┐       ┌─────────────────┐
-│   MOCK_USERS    │◄─────►│  MOCK_LISTINGS  │◄─────►│   MOCK_NEEDS    │
-│  (6 Profiles)   │       │   (12 Items)    │       │  (6 Requests)   │
-└────────┬────────┘       └─────────────────┘       └─────────────────┘
-         │
-         ├───────────────►┌─────────────────────┐
-         │                │ MOCK_COMMUNITY_POSTS│
-         │                │     (8 Posts)       │
-         │                └─────────────────────┘
-         │
-         └───────────────►┌─────────────────────┐
-                          │ MOCK_OPPORTUNITIES  │
-                          │   (15 Curated)      │
-                          └─────────────────────┘
-```
-
-- **Campuses (`MOCK_CAMPUSES`):** Multi-disciplinary coverage across engineering, management, design, liberal arts, and sciences (GLIM, IIT Madras, BITS Pilani, Ashoka University, NID, IIM Bangalore, NLSIU).
-- **Users (`MOCK_USERS`):** 6 diverse profiles with batch year, specialization, verified flags, ratings, bio, skills, and target interests.
-- **Listings (`MOCK_LISTINGS`):** 12 items across Formal Wear, Electronics, Books & Notes, Sports Gear, and Bulk Resale with photos, terms, and status (`available`, `borrowed`, `sold`).
-- **Needs (`MOCK_NEEDS`):** 6 reverse requests (Bluetooth Speaker, Lab Coat, TI-84, Marketing Case Study, Table Lamp) with needed-by dates and terms (`borrow-only`, `willing-to-pay`, `either`).
-- **Opportunities (`MOCK_OPPORTUNITIES`):** 15 curated competitions, hackathons, and scholarships across all disciplines.
-- **Community Posts (`MOCK_COMMUNITY_POSTS`):** 8 multi-category posts with live reaction counts and interested student lists.
-- **Chat Scripts (`MOCK_CHAT_SCRIPTS`):** Pre-scripted contextual message exchanges for items, needs, and peer connections.
-
----
-
-## 📂 PlantUML Diagram Suite (.puml Files)
-
-For formal UML documentation and PlantUML rendering tools, the project includes standalone PUML files in the [`diagrams/`](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/diagrams) directory:
-
-1. [diagrams/system-architecture.puml](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/diagrams/system-architecture.puml) — Complete component layout, presentation layer, reactive state store, and matching engine interactions.
-2. [diagrams/onboarding-flow.puml](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/diagrams/onboarding-flow.puml) — Full 5-step sequence diagram for campus selection, OTP verification, profile enrichment, ID badge upload, and celebration.
-3. [diagrams/persona-journeys.puml](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/diagrams/persona-journeys.puml) — 7 comprehensive persona journeys spanning all 4 product pillars (Borrowing, Reverse Needs, Connect Hub, Community Team-Ups, Opportunities Radar, Resale, and Accountability).
-4. [diagrams/accountability-loop.puml](file:///c:/Users/pavit/Documents/MBA/2025/PROJECTS/peerly/diagrams/accountability-loop.puml) — Closed-loop campus trust state machine from listing to handoff, return condition inspection, and peer rating bump.
 
 ---
 
